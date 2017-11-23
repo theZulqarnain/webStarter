@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "test": "echo \"Error: no test specified\" && exit 1",
+      "build": "BABEL_REPLACE=.custom.babelrc WEBPACK_MERGE=custom.js react-scripts-custom build",
+      "eject": "react-scripts eject"
+    },
   "author": "zulqarnain",
   "license": "ISC",
   "dependencies": {
