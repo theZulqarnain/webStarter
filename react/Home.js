@@ -33,7 +33,7 @@ class Home extends Component{
         axios.get('/api/download/expressHtml')
             .then(res=>{
                 // res.json('wait until file downloaded!')
-                FileDownload(res.data, 'expressHtml.zip');
+                FileDownload(res.data, 'ExpressEjs.zip');
 
             })
     }
@@ -42,7 +42,16 @@ class Home extends Component{
         axios.get('/api/download/expressWithReact')
             .then(res=>{
                 // res.json('wait until file downloaded!')
-                FileDownload(res.data, 'expressWithReact.zip');
+                FileDownload(res.data, 'ExpressReact.zip');
+
+            })
+    }
+
+    expressWithVue(){
+        axios.get('/api/download/expressWithReact')
+            .then(res=>{
+                // res.json('wait until file downloaded!')
+                FileDownload(res.data, 'expressVue.zip');
 
             })
     }
@@ -73,8 +82,11 @@ class Home extends Component{
                     <Button raised color="primary" onClick={this.expressWithReact}>
                         React with express
                     </Button>
-                    <Button raised color="primary" onClick={this.expressHtml}>
+                    <Button raised color="primary" onClick={this.expressWithVue}>
                         Vue with express
+                    </Button>
+                    <Button raised color="primary" onClick={this.expressWithVue}>
+                        Angular with express
                     </Button>
                     <Button raised color="primary" onClick={this.expressHtml}>
                         Ejs with express

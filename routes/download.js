@@ -7,7 +7,12 @@ router.get('/expressHtml', function(req, res){
 });
 
 router.get('/expressWithReact', function(req, res){
-    var file = __dirname + '/../expressWithReact.zip';
+    var file = __dirname + '/../ReactExpress.zip';
+    return res.download(file); // Set disposition and send it.
+});
+
+router.get('/expressWithVue', function(req, res){
+    var file = __dirname + '/../VueExpress.zip';
     return res.download(file); // Set disposition and send it.
 });
 
