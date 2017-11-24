@@ -55,6 +55,14 @@ class Home extends Component{
 
             })
     }
+    expressWithAngular(){
+        axios.get('/api/download/expressWithAngular')
+            .then(res=>{
+                // res.json('wait until file downloaded!')
+                FileDownload(res.data, 'expressAngular.zip');
+
+            })
+    }
 
     componentDidMount(){
         this.Home();
@@ -85,7 +93,7 @@ class Home extends Component{
                     <Button raised color="primary" onClick={this.expressWithVue}>
                         Vue with express
                     </Button>
-                    <Button raised color="primary" onClick={this.expressWithVue}>
+                    <Button raised color="primary" onClick={this.expressWithAngular}>
                         Angular with express
                     </Button>
                     <Button raised color="primary" onClick={this.expressHtml}>
