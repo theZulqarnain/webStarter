@@ -6,6 +6,8 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
+const FileDownload = require('react-file-download');
+
 // import './Home.css'
 class Home extends Component{
     constructor(props){
@@ -15,7 +17,7 @@ class Home extends Component{
         }
     }
 
-    backendCall(){
+    Home(){
         {
             axios.get('/api/')
                 .then(res=>{
@@ -27,8 +29,26 @@ class Home extends Component{
         }
     }
 
+    expressHtml(){
+        axios.get('/api/download/expressHtml')
+            .then(res=>{
+                // res.json('wait until file downloaded!')
+                FileDownload(res.data, 'expressHtml.zip');
+
+            })
+    }
+
+    expressWithReact(){
+        axios.get('/api/download/expressWithReact')
+            .then(res=>{
+                // res.json('wait until file downloaded!')
+                FileDownload(res.data, 'expressWithReact.zip');
+
+            })
+    }
+
     componentDidMount(){
-        this.backendCall();
+        this.Home();
     }
     render(){
         return(
@@ -48,6 +68,18 @@ class Home extends Component{
                     <Typography type="display3" gutterBottom >
                         Welcome to the Web Starter
                     </Typography>
+                </div>
+                <div>
+                    <Button raised color="primary" onClick={this.expressWithReact}>
+                        React with express
+                    </Button>
+                    <Button raised color="primary" onClick={this.expressHtml}>
+                        Vue with express
+                    </Button>
+                    <Button raised color="primary" onClick={this.expressHtml}>
+                        Ejs with express
+                    </Button>
+
                 </div>
             </div>
         )

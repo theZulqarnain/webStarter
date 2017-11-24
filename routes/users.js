@@ -9,5 +9,4 @@ router.get('/', function(req, res, next) {
 router.get('/edit', function(req, res, next) {
     res.send('edit user page');
 });
-
 module.exports = router;

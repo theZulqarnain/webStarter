@@ -6,9 +6,9 @@
   "scripts": {
     "start": "webpack-dev-server --hot",
     "test": "echo \"Error: no test specified\" && exit 1",
-      "build": "BABEL_REPLACE=.custom.babelrc WEBPACK_MERGE=custom.js react-scripts-custom build",
-      "eject": "react-scripts eject"
-    },
+    "build": "BABEL_REPLACE=.custom.babelrc WEBPACK_MERGE=custom.js react-scripts-custom build",
+    "eject": "react-scripts eject"
+  },
   "author": "zulqarnain",
   "license": "ISC",
   "dependencies": {
@@ -20,6 +20,7 @@
     "material-ui": "^1.0.0-beta.21",
     "material-ui-icons": "^1.0.0-beta.17",
     "react-dom": "^16.1.1",
+    "react-file-download": "^0.3.5",
     "typeface-roboto": "0.0.45",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"
