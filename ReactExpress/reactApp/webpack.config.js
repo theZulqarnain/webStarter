@@ -1,12 +1,26 @@
 var config = {
-    entry: './main.js',
+    entry: './index.js',
     output: {
         path:'/',
         filename: 'index.js',
+        sourceMapFilename: "index.map"
     },
+    devtool:"#source-map",
     devServer: {
         inline: true,
-        port: 8000
+        port: 8000,
+        proxy: {
+            '/api': {
+                target: {
+                    host: "0.0.0.0",
+                    protocol: 'http:',
+                    port: 8080
+                },
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
     },
     module: {
         loaders: [
