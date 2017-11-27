@@ -13,7 +13,7 @@ router.post('/register', function(req, res, next) {
           return res.render(err)
         }
         passport.authenticate("local")(req,res,function () {
-            res.json("user inserted!")
+            res.json({isRegistered:true})
         })
     })
 });

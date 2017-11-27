@@ -7,22 +7,32 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Save from 'material-ui-icons/Save';
 import axios from 'axios';
+import { Route, Redirect } from 'react-router'
+import { browserHistory } from 'react-router'
 
 class register extends Component{
     constructor(props){
         super(props);
         this.state={
-
+            isRegistered:false
         }
         this.updateForm=this.updateForm.bind(this);
         this.registerFormHandler=this.registerFormHandler.bind(this);
     }
 
     registerFormHandler(){
-        console.log('entered')
+        // console.log('entered')
         axios.post(`/api/users/register`,{username:this.state.username,password:this.state.password})
             .then(res => {
-                console.log(res)
+                if(res.data){
+                    {/*<Redirect to='/login'/>*/}
+                    // console.log(res.data)
+                    this.setState({
+                        isRegistered:res.data
+                    })
+
+                }
+
             });
     }
     updateForm(e){
@@ -62,6 +72,9 @@ class register extends Component{
                         Save
                     </Button>
                 </div>
+                {this.state.isRegistered ?
+                    <Redirect to='/login'/>
+                    : null}
             </div>
         )
     }

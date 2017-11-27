@@ -28,11 +28,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Passport Config
-app.use(require('express-session')({
-    secret:'this is abdulla zulqarnain',
-    resave:false,
-    saveUninitialized:false
-}));
+// app.use(require('express-session')({
+//     secret:'this is abdulla zulqarnain',
+//     resave:false,
+//     saveUninitialized:false
+// }));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -44,9 +44,6 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use('/', index);
 app.use('/users', users);
-app.get("/success", function(req,res){
-    res.json("successsfully loggedin")
-})
 
 // catch 404    and forward to error handler
 app.use(function(req, res, next) {
