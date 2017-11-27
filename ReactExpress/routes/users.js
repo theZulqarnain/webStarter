@@ -6,7 +6,7 @@ var mongoose      = require('mongoose'),
     User          = require('../models/user');
 
 /* GET users listing. */
-router.post('/', function(req, res, next) {
+router.post('/register', function(req, res, next) {
     var newUser = new User({username:req.body.username})
     User.register(newUser,req.body.password,function (err, user) {
         if(err){
@@ -17,5 +17,28 @@ router.post('/', function(req, res, next) {
         })
     })
 });
+
+router.post('/login',passport.authenticate('local',
+    {
+            successRedirect: '/api/',
+            failureRedirect: '/',
+    }),function (req,res) {
+
+    console.log("iji")
+})
+
+// logout route
+router.get('/logout',function (req,res) {
+    req.logout();
+    res.send('logout.....')
+    // res.redirect()
+})
+
+function isLoggedIn(req,res,next) {
+    if(req.isAuthenticated()){
+        return next();
+    }
+
+}
 
 module.exports = router;

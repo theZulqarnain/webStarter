@@ -20,7 +20,7 @@ class register extends Component{
 
     registerFormHandler(){
         console.log('entered')
-        axios.post(`/api/users/`,{username:this.state.username,password:this.state.password})
+        axios.post(`/api/users/register`,{username:this.state.username,password:this.state.password})
             .then(res => {
                 console.log(res)
             });

@@ -31,6 +31,7 @@ class Home extends Component{
                         <Button color="contrast" > <Link to="/login" >Login</Link></Button>
                         {/*<Link to="/update_venue" onClick={this.sendEditData}>Update</Link>*/}
                         <Button color="contrast" > <Link to="/register" >Register</Link></Button>
+                        <Button color="contrast" > <Link to="/logout" >Logout</Link></Button>
 
                     </Toolbar>
                 </AppBar>

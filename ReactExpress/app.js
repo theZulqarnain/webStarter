@@ -44,9 +44,11 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use('/', index);
 app.use('/users', users);
+app.get("/success", function(req,res){
+    res.json("successsfully loggedin")
+})
 
-
-// catch 404 and forward to error handler
+// catch 404    and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
