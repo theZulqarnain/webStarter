@@ -64,6 +64,7 @@ class login extends Component{
                     <Typography type="display1" gutterBottom >
                         Social Login
                     </Typography>
+                    <a href="/api/auth/google/callback">Google</a>
                 </div>
                 {this.props.loggedState ?
                     <Redirect to='/'/>
