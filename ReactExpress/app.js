@@ -11,6 +11,7 @@ var mongoose      = require('mongoose'),
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var auth = require('./routes/auth')
 
 var app = express();
 
@@ -44,6 +45,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/auth',auth);
 
 // catch 404    and forward to error handler
 app.use(function(req, res, next) {
