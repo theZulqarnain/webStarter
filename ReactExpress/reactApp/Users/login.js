@@ -12,7 +12,6 @@ import axios from 'axios';
 class login extends Component{
     constructor(props){
         super(props);
-        this.state={};
         this.updateForm=this.updateForm.bind(this);
         this.loginHandler=this.loginHandler.bind(this);
     }
@@ -21,8 +20,7 @@ class login extends Component{
         // console.log('entered')
         axios.post(`/api/users/login`,{username:this.state.username,password:this.state.password})
             .then(res => {
-
-                console.log(res)
+                this.props.isLoggedIn(res.data.isLoggedin)
             });
     }
     updateForm(e){
@@ -36,7 +34,7 @@ class login extends Component{
     render(){
         return(
             <div>
-                <Header/>
+
                 <div>
                     <Typography type="display1" gutterBottom >
                         Login Form
@@ -62,6 +60,14 @@ class login extends Component{
                         Save
                     </Button>
                 </div>
+                <div>
+                    <Typography type="display1" gutterBottom >
+                        Social Login
+                    </Typography>
+                </div>
+                {this.props.loggedState ?
+                    <Redirect to='/'/>
+                    : null}
             </div>
         )
     }

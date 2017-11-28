@@ -25,8 +25,6 @@ class register extends Component{
         axios.post(`/api/users/register`,{username:this.state.username,password:this.state.password})
             .then(res => {
                 if(res.data){
-                    {/*<Redirect to='/login'/>*/}
-                    // console.log(res.data)
                     this.setState({
                         isRegistered:res.data
                     })
@@ -46,7 +44,7 @@ class register extends Component{
     render(){
         return(
             <div>
-                <Header/>
+
                 <div>
                     <Typography type="display1" gutterBottom >
                         Registration Form

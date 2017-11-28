@@ -16,10 +16,11 @@ class Logout extends Component{
         axios.get(`/api/users/logout`)
             .then(res => {
                 // this.context.router.history.push("/");
-                console.log(res);
-                this.setState({
-                    logout:true
-                })
+                // console.log(res);
+                // this.setState({
+                //     logout:true
+                // })
+                this.props.isLoggedIn(false);
             });
     }
     componentDidMount(){
@@ -29,7 +30,7 @@ class Logout extends Component{
         return(
             <div>
                 <button onClick={this.logoutHandler}>click</button>
-                {this.state.logout ?
+                {this.props.loggedState ?
                     <Redirect to='/'/>
                     : null}
             </div>

@@ -28,10 +28,15 @@ class Home extends Component{
                             Web Starter
                         </Typography>
                         <Button color="contrast" > <Link to="/" >Home</Link></Button>
-                        <Button color="contrast" > <Link to="/login" >Login</Link></Button>
-                        {/*<Link to="/update_venue" onClick={this.sendEditData}>Update</Link>*/}
-                        <Button color="contrast" > <Link to="/register" >Register</Link></Button>
-                        <Button color="contrast" > <Link to="/logout" >Logout</Link></Button>
+                        {this.props.isLoggedIn ==="false"?
+                            <div>
+                                <Button color="contrast" > <Link to="/login" >Login</Link></Button>
+                                <Button color="contrast" > <Link to="/register" >Register</Link></Button>
+                            </div>
+                            :
+                            <Button color="contrast" > <Link to="/logout" >Logout</Link></Button> }
+
+
 
                     </Toolbar>
                 </AppBar>

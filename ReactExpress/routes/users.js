@@ -20,13 +20,15 @@ router.post('/register', function(req, res, next) {
 
 router.post('/login',passport.authenticate('local',
     {
-            successRedirect: '/api/',
+            successRedirect: '/api/users/isLoggedin',
             failureRedirect: '/',
     }),function (req,res) {
 
     console.log("iji")
 })
-
+router.get('/isLoggedin',function (req, res) {
+    res.json({isLoggedin:true});
+})
 // logout route
 router.get('/logout',function (req,res) {
     req.logout();
