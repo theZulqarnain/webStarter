@@ -1,11 +1,9 @@
-const   express         =   require('express'),
-        passport        =   require('passport'),
-        GoogleStrategy  =   require('passport-google-oauth20').Strategy,
-        app             =   express(),
-        keys            =   require('../config/keys'),
-        router          =   express.Router();
-        User            =   require('../models/user')
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const mongoose = require('mongoose');
+const keys = require('../config/keys');
 
+const User = mongoose.model('users');
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -39,16 +37,3 @@ passport.use(new GoogleStrategy(
 
     }
 ));
-
-router.get(
-    '/google',
-    passport.authenticate('google',{
-        scope   :   ['profile','email']
-    }));
-router.get('/google/callback',passport.authenticate('google'));
-router.get('/app/current_user',(req,res)=>{
-    res.json({});
-    // console.log(req.user)
-});
-
-module.exports = router;

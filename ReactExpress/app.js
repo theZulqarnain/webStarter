@@ -7,7 +7,9 @@ var bodyParser = require('body-parser');
 var mongoose      = require('mongoose'),
     passport       = require('passport'),
     LocalStrategy = require('passport-local'),
-    User          = require('./models/user');
+    User          = require('./models/user'),
+    cookieSession   =   require('cookie-session'),
+    keys            =   require('./config/keys')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -34,11 +36,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 //     resave:false,
 //     saveUninitialized:false
 // }));
+app.use(
+    cookieSession({
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        keys: [keys.cookieKey]
+    })
+);
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+
+// passport.use(new LocalStrategy(User.authenticate()));
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 
 //Routes
