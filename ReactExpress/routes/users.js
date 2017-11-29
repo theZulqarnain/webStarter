@@ -20,7 +20,7 @@ router.post('/register', function(req, res, next) {
 
 router.post('/login',passport.authenticate('local',
     {
-            successRedirect: '/api/users/isLoggedin',
+            successRedirect: '/api/auth/isLoggedin',
             failureRedirect: '/',
     }),function (req,res) {
 

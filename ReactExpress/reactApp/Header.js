@@ -14,6 +14,15 @@ class Home extends Component{
         super(props)
         this.state={
         }
+        this.logoutHandler=this.logoutHandler.bind(this)
+    }
+
+    logoutHandler(){
+        axios.get(`/api/auth/logout`)
+            .then(res => {
+                // debugger;
+                this.props.isLoggedInfn(false);
+            });
     }
 
     render(){
@@ -28,13 +37,17 @@ class Home extends Component{
                             Web Starter
                         </Typography>
                         <Button color="contrast" > <Link to="/" >Home</Link></Button>
-                        {this.props.isLoggedIn ==="false"?
+
+
+                        {this.props.isLoggedIn.toString()}
+                        {this.props.isLoggedIn.toString()==="false"?
                             <div>
                                 <Button color="contrast" > <Link to="/login" >Login</Link></Button>
                                 <Button color="contrast" > <Link to="/register" >Register</Link></Button>
                             </div>
                             :
-                            <Button color="contrast" > <Link to="/logout" >Logout</Link></Button> }
+                            <Button color="contrast" onClick={this.logoutHandler}>Logout</Button>
+    }
 
 
 

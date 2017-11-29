@@ -18,6 +18,45 @@ passport.deserializeUser((id, done) => {
     });
 });
 
+//////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////Local AUTH///////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//Local Strategy
+
+//Registering user
+router.post('/register', function(req, res, next) {
+    var newUser = new User({username:req.body.username})
+    User.register(newUser,req.body.password,function (err, user) {
+        if(err){
+            return res.render(err)
+        }
+        passport.authenticate("local")(req,res,function () {
+            res.json({isRegistered:true})
+        })
+    })
+});
+//Logging User
+router.post('/login',passport.authenticate('local',
+    {
+        successRedirect: '/api/auth/isLoggedin',
+        failureRedirect: '/',
+    }),function (req,res) {
+
+});
+//sending value to React
+router.get('/isLoggedin',function (req, res) {
+    res.json({isLoggedin:true});
+})
+
+// logout route
+router.get('/logout',function (req,res) {
+    req.logout();
+    res.json({})
+})
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////GitHub AUTH///////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
 passport.use(new GoogleStrategy(
     {
         clientID    :   keys.googleClientID,
@@ -48,7 +87,7 @@ router.get(
     }));
 router.get('/google/callback',passport.authenticate('google'),
     (req, res) => {
-        res.redirect('/users/isLoggedin');
+        res.redirect('/auth/isLoggedin');
     }
 );
 router.get('/app/current_user',(req,res)=>{
@@ -57,10 +96,10 @@ router.get('/app/current_user',(req,res)=>{
     // console.log(req.user)
 });
 
-router.get('/app/logout',(req,res)=>{
-    req.logout();
-    res.send('logging out........')
-})
+// router.get('/app/logout',(req,res)=>{
+//     req.logout();
+//     res.send('logging out........')
+// })
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,7 +132,7 @@ router.get('/facebook',
 
 router.get('/facebook/callback',passport.authenticate('facebook'),
     (req, res) => {
-        res.redirect('/users/isLoggedin');
+        res.redirect('/auth/isLoggedin');
     }
 );
 
@@ -129,7 +168,7 @@ router.get('/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
     function(req, res) {
         // Successful authentication, redirect home.
-        res.redirect('/users/isLoggedin');
+        res.redirect('/auth/isLoggedin');
     });
 
 module.exports = router;

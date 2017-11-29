@@ -36,7 +36,7 @@ class login extends Component{
 
     loginHandler(){
         // console.log('entered')
-        axios.post(`/api/users/login`,{username:this.state.username,password:this.state.password})
+        axios.post(`/api/auth/login`,{username:this.state.username,password:this.state.password})
             .then(res => {
                 this.props.isLoggedIn(res.data.isLoggedin)
             });

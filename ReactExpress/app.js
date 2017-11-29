@@ -45,9 +45,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
 //Routes
@@ -55,9 +55,6 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/users', users);
 app.use('/auth',auth);
-app.use('/webhook',function (req, res) {
-    res.json('')
-});
 
 // catch 404    and forward to error handler
 app.use(function(req, res, next) {
