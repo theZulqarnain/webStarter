@@ -14,6 +14,24 @@ class login extends Component{
         super(props);
         this.updateForm=this.updateForm.bind(this);
         this.loginHandler=this.loginHandler.bind(this);
+        this.GoogleloginHandler=this.GoogleloginHandler.bind(this);
+    }
+
+    GoogleloginHandler(){
+        console.log('googleHandler')
+        axios.get(`/api/auth/google`)
+            .then(res => {
+                console.log(res.data);
+                this.props.isLoggedIn(res.data.isLoggedin)
+            });
+    }
+
+    fbloginHandler(){
+        axios.get(`/api/auth/facebook`)
+            .then(res => {
+                console.log(res.data);
+                this.props.isLoggedIn(res.data.isLoggedin)
+            });
     }
 
     loginHandler(){
@@ -64,7 +82,14 @@ class login extends Component{
                     <Typography type="display1" gutterBottom >
                         Social Login
                     </Typography>
+                    <Button raised dense onClick={this.GoogleloginHandler}>
+                        Google
+                    </Button>
+                    <Button raised dense onClick={this.fbloginHandler}>
+                        Facebook
+                    </Button>
                     <a href="/api/auth/google/callback">Google</a>
+                    <a href="/api/auth/google/callback">facebook</a>
                 </div>
                 {this.props.loggedState ?
                     <Redirect to='/'/>

@@ -5,7 +5,8 @@ mongoose.connect("mongodb://localhost/webstarter")
 var UserSchema = new mongoose.Schema({
     username:String,
     password:String,
-    googleId:String
+    googleId:String,
+    facebookId:String
 });
 
 UserSchema.plugin(passportLocalMongoose);

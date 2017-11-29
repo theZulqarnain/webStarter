@@ -24,8 +24,7 @@ router.post('/login',passport.authenticate('local',
             failureRedirect: '/',
     }),function (req,res) {
 
-    console.log("iji")
-})
+});
 router.get('/isLoggedin',function (req, res) {
     res.json({isLoggedin:true});
 })
