@@ -55,6 +55,9 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/users', users);
 app.use('/auth',auth);
+app.use('/webhook',function (req, res) {
+    res.json('')
+});
 
 // catch 404    and forward to error handler
 app.use(function(req, res, next) {
