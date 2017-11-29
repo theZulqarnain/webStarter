@@ -102,7 +102,7 @@ router.get('/facebook/callback',passport.authenticate('facebook'),
 /////////////////////////////////////////////////////////////////////////////////////////////////
 passport.use(new GitHubStrategy({
         clientID: keys.githubClientID,
-        clientSecret: keys.facebookClientSecret,
+        clientSecret: keys.githubClientSecret,
         callbackURL: "/auth/github/callback"
     },
     ( accessToken,refreshToken,profile,done) =>{
@@ -122,7 +122,7 @@ passport.use(new GitHubStrategy({
     }
 ));
 
-router.get('/github',
+router.get('/github',function(req,res,next){console.log("ss");next();},
     passport.authenticate('github', { scope: [ 'user:email' ] }));
 
 router.get('/github/callback',

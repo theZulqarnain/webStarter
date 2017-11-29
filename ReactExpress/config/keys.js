@@ -4,6 +4,6 @@ module.exports ={
     cookieKey           :        'abdullaZulqarnain',
     facebookClientID    :       '847725942084636',
     facebookClientSecret:       'a9cbc02fe70c74aee9e52e237bebc853',
-    githubClientID      :       'Iv1.48c5b1a179eafd96',
-    githubClientSecret  :       'ce2b554c2b612b1f48da1cc1547585112d37229b'
+    githubClientID      :       '0eb460568785196970d7',
+    githubClientSecret  :       '29a6da4bd98a8e848582aa6fefad3ab8217ea6f4'
 }
