@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --hot",
     "build": "BABEL_REPLACE=.custom.babelrc WEBPACK_MERGE=custom.js react-scripts-custom build",
     "eject": "react-scripts eject"
   },

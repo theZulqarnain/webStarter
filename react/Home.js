@@ -66,6 +66,10 @@ class Home extends Component{
 
     componentDidMount(){
         this.Home();
+
+
+
+
     }
     render(){
         return(
