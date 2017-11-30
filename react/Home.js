@@ -1,14 +1,8 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
 const FileDownload = require('react-file-download');
 
-import classes from './Home.css'
+import classNamees from './Home.css'
 class Home extends Component{
     constructor(props){
         super(props)
@@ -63,49 +57,94 @@ class Home extends Component{
 
             })
     }
-
+    downloader(){
+        axios.get('/api/download/zip')
+            .then(res=>{
+                // res.json('wait until file downloaded!')
+                console.log(res,'React response')
+            })
+    }
     componentDidMount(){
         this.Home();
-
-
-
-
     }
     render(){
         return(
-            <div >
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton  color="contrast" aria-label="Menu">
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography type="title" color="inherit" >
-                            Web Starter
-                        </Typography>
-                        <Button color="contrast">Login</Button>
-                    </Toolbar>
-                </AppBar>
-                <div className={classes.txtCenter}>
-                    <Typography type="display3" gutterBottom  >
-                        Welcome to the Web Starter
-                    </Typography>
-                </div>
-                <div>
-                    <Button raised color="primary" onClick={this.expressWithReact}>
-                        React with express
-                    </Button>
-                    <Button raised color="primary" onClick={this.expressWithVue}>
-                        Vue with express
-                    </Button>
-                    <Button raised color="primary" onClick={this.expressWithAngular}>
-                        Angular with express
-                    </Button>
-                    <Button raised color="primary" onClick={this.expressHtml}>
-                        Ejs with express
-                    </Button>
+           <div>
+               <div className="container">
+                   <h2 className="text-center">Let's,Customize Your Dream Project</h2>
+                   <div>
+                       <div className="title">
+                           <h3>Database</h3>
+                       </div>
 
-                </div>
-            </div>
+                       <ul className="nav nav-pills" role="tablist">
+
+                           <li className="liMargin">
+                               <a href="#dashboard" role="tab" data-toggle="tab">
+                                   <i className="material-icons">dashboard</i>
+                                   Dashboard
+                               </a>
+                           </li>
+                           <li className="active liMargin"  >
+                               <a href="#schedule" role="tab" data-toggle="tab">
+                                   <i className="material-icons">schedule</i>
+                                   Schedule
+                               </a>
+                           </li>
+                           <li className="liMargin">
+                               <a href="#tasks" role="tab" data-toggle="tab">
+                                   <i className="material-icons">list</i>
+                                   Tasks
+                               </a>
+                           </li>
+                           <li className="liMargin">
+                               <a href="#payments" role="tab" data-toggle="tab">
+                                   <i className="material-icons">attach_money</i>
+                                   Payments
+                               </a>
+                           </li>
+                       </ul>
+                   </div>
+
+                   <div>
+                       <div className="title">
+                           <h3>FrontEnd</h3>
+                       </div>
+
+                       <ul className="nav nav-pills" role="tablist">
+
+                           <li className="liMargin">
+                               <a href="#dashboard" role="tab" data-toggle="tab">
+                                   <i className="material-icons">dashboard</i>
+                                   Dashboard
+                               </a>
+                           </li>
+                           <li className="active liMargin"  >
+                               <a href="#schedule" role="tab" data-toggle="tab">
+                                   <i className="material-icons">schedule</i>
+                                   Schedule
+                               </a>
+                           </li>
+                           <li className="liMargin">
+                               <a href="#tasks" role="tab" data-toggle="tab">
+                                   <i className="material-icons">list</i>
+                                   Tasks
+                               </a>
+                           </li>
+                           <li className="liMargin">
+                               <a href="#payments" role="tab" data-toggle="tab">
+                                   <i className="material-icons">attach_money</i>
+                                   Payments
+                               </a>
+                           </li>
+                       </ul>
+                   </div>
+
+                       <div className="text-center">
+                           <button className="btn btn-primary " onClick={this.downloader}>Download</button>
+                       </div>
+               </div>
+           </div>
         )
     }
 }

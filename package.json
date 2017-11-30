@@ -18,6 +18,7 @@
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "serve-favicon": "~2.4.5",
+    "shelljs": "^0.7.8",
     "webpack": "^3.8.1"
   }
 }
