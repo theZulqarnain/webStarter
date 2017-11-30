@@ -8,7 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 const FileDownload = require('react-file-download');
 
-// import './Home.css'
+import classes from './Home.css'
 class Home extends Component{
     constructor(props){
         super(props)
@@ -81,8 +81,8 @@ class Home extends Component{
                         <Button color="contrast">Login</Button>
                     </Toolbar>
                 </AppBar>
-                <div>
-                    <Typography type="display3" gutterBottom >
+                <div className={classes.txtCenter}>
+                    <Typography type="display3" gutterBottom  >
                         Welcome to the Web Starter
                     </Typography>
                 </div>
