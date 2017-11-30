@@ -20,7 +20,8 @@ class Home extends Component{
     logoutHandler(){
         axios.get(`/api/auth/logout`)
             .then(res => {
-                // debugger;
+
+            console.log(res);
                 this.props.isLoggedInfn(false);
             });
     }
@@ -38,19 +39,14 @@ class Home extends Component{
                         </Typography>
                         <Button color="contrast" > <Link to="/" >Home</Link></Button>
 
-
-                        {this.props.isLoggedIn.toString()}
-                        {this.props.isLoggedIn.toString()==="false"?
+                        {!this.props.isLoggedIn ?
                             <div>
                                 <Button color="contrast" > <Link to="/login" >Login</Link></Button>
                                 <Button color="contrast" > <Link to="/register" >Register</Link></Button>
                             </div>
                             :
                             <Button color="contrast" onClick={this.logoutHandler}>Logout</Button>
-    }
-
-
-
+                        }
                     </Toolbar>
                 </AppBar>
             </div>
