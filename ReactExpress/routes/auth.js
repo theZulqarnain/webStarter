@@ -23,6 +23,7 @@ passport.deserializeUser((id, done) => {
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Local Strategy
 
+
 //Registering user
 router.post('/register', function(req, res, next) {
     var newUser = new User({username:req.body.username})
@@ -135,7 +136,7 @@ router.get('/facebook/callback',passport.authenticate('facebook'),
         res.redirect('/auth/isLoggedin');
     }
 );
-
+/*github start*/
 //////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////GitHub AUTH///////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -170,5 +171,5 @@ router.get('/github/callback',
         // Successful authentication, redirect home.
         res.redirect('/auth/isLoggedin');
     });
-
+/*github end*/
 module.exports = router;
