@@ -10,6 +10,7 @@ class Home extends Component{
             val:'',
             authentication:''
         }
+        this.downloader=this.downloader.bind(this);
     }
 
     Home(){
@@ -59,10 +60,11 @@ class Home extends Component{
             })
     }
     downloader(){
-        axios.get('/api/download/zip')
+        axios.post('/api/download/zip',{authentication:this.state.authentication})
             .then(res=>{
                 // res.json('wait until file downloaded!')
-                console.log(res,'React response')
+                // console.log(res,'React response')
+                FileDownload(res.data, 'ExpressReact.zip');
             })
     }
     authentication(val){
