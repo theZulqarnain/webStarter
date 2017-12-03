@@ -22,8 +22,9 @@ class register extends Component{
 
     registerFormHandler(){
         // console.log('entered')
-        axios.post(`/api/auth/register`,{username:this.state.username,password:this.state.password})
+        axios.post(`/api/Mauth/register`,{username:this.state.username,password:this.state.password})
             .then(res => {
+                console.log(res.data)
                 if(res.data){
                     this.setState({
                         isRegistered:res.data
