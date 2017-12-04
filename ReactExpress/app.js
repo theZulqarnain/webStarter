@@ -30,8 +30,10 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+//For BodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -42,12 +44,12 @@ app.use(require('express-session')({
     resave:false,
     saveUninitialized:true
 }));
-app.use(
-    cookieSession({
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        keys: [keys.cookieKey]
-    })
-);
+// app.use(
+//     cookieSession({
+//         maxAge: 30 * 24 * 60 * 60 * 1000,
+//         keys: [keys.cookieKey]
+//     })
+// );
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -56,19 +58,25 @@ app.use(passport.session());
 // passport.deserializeUser(User.deserializeUser());
 
 
+//Models
+var models = require("./Smodels/index");
+
 //Routes
 
 app.use('/', index);
 // app.use('/users', users);
 // app.use('/auth',auth);
 app.use('/Mauth',Mauth);
-// app.use('/Sauth',Sauth);
+app.use('/Sauth',Sauth);
 
+
+//load passport strategies
+
+require('./services/passport.js')(passport, models.user);
 
 ///////////////////////////////Sequelize////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-//Models
-var models = require("./Smodels/index");
+
 
 //Sync Database
 models.sequelize.sync().then(function() {

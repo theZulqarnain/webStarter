@@ -16,11 +16,11 @@
 
   "test": {
 
-    "username": "",
+    "username": "root",
 
     "password": null,
 
-    "database": "",
+    "database": "webstarter",
 
     "host": "",
 
@@ -30,11 +30,11 @@
 
   "production": {
 
-    "username": "",
+    "username": "root",
 
     "password": null,
 
-    "database": "",
+    "database": "webstarter",
 
     "host": "127.0.0.1",
 

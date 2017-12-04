@@ -1,8 +1,9 @@
-// const Sequelize = require("sequelize"),
-//     express = require('express'),
-//      router = express.Router()
-//
-//
+var Sequelize     = require("sequelize"),
+    express         = require('express'),
+     router         = express.Router(),
+    passport        = require('passport')
+require('../services/passport.js')
+
 // //Setting up the config
 // var sequelize = new Sequelize('webstarter', 'root', '', {
 //     host: "localhost",
@@ -42,5 +43,34 @@
 //         qty: Sequelize.INTEGER
 //     });
 // });
+
+// router.post('/register', function(req, res, next) {
+//     res.json('getting data')
+// })
+router.post('/register', passport.authenticate('local-signup', {
+        successRedirect: '/api/Sauth/isLoggedin',
+
+        failureRedirect: '/'
+    }
+
+));
+// function isLoggedIn(req, res, next) {
 //
-// module.exports = router;
+//     if (req.isAuthenticated())
+//         return next();
+//     res.redirect('/signin');
+// }
+router.get('/isLoggedin',function (req, res) {
+    res.json({isLoggedin:true});
+});
+router.logout = function(req, res) {
+
+    req.session.destroy(function(err) {
+
+        res.redirect('/');
+
+    });
+
+}
+
+module.exports = router;
