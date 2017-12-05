@@ -53,7 +53,7 @@ app.use(function(err, req, res, next) {
 });
 
 //PORT Listen section
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 8001);
 app.listen(app.get('port'));
 
 module.exports = app;
