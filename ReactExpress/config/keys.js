@@ -5,5 +5,8 @@ module.exports ={
     facebookClientID    :       '847725942084636',
     facebookClientSecret:       'a9cbc02fe70c74aee9e52e237bebc853',
     githubClientID      :       '0eb460568785196970d7',
-    githubClientSecret  :       '29a6da4bd98a8e848582aa6fefad3ab8217ea6f4'
+    githubClientSecret  :       '29a6da4bd98a8e848582aa6fefad3ab8217ea6f4',
+    mysql_pwd           :       'admin',
+    mysql_DB            :       'webstarter',
+    mysql_users_tbl     :       'users'
 }
