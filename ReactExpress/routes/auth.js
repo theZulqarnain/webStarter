@@ -1,3 +1,4 @@
+/* MONGOOSE START */
 const   express         =   require('express'),
         passport        =   require('passport'),
         GoogleStrategy  =   require('passport-google-oauth20').Strategy,
@@ -175,4 +176,10 @@ router.get('/github/callback',
         res.redirect('/auth/isLoggedin');
     });
 /*github end*/
+
 module.exports = router;
+/* MONGOOSE END */
+
+/* SEQUELIZE START */
+
+/* SEQUELIZE END */
