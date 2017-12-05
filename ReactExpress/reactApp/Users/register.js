@@ -21,19 +21,7 @@ class register extends Component{
     }
 
     registerFormHandler(){
-        // console.log('entered')
-        // axios.post(`/api/Sauth/register`,{username:this.state.username,password:this.state.password})
-        //     .then(res => {
-        //         console.log(res.data)
-        //         if(res.data){
-        //             this.setState({
-        //                 isRegistered:res.data
-        //             })
-        //
-        //         }
-        //
-        //     });
-        axios.post(`/api/Sauth/register`,{firstname:this.state.firstname,lastname:this.state.lastname, email:this.state.email,password:this.state.password})
+        axios.post(`/api/auth/register`,{username:this.state.username,password:this.state.password})
             .then(res => {
                 console.log(res.data)
                 if(res.data){
@@ -63,26 +51,10 @@ class register extends Component{
                     </Typography>
                     <FormControl>
                         <TextField
-                            label="First Name"
-                            id="firstname"
+                            label="username"
+                            id="username"
                             type="text"
-                            name="firstname"
-                            onChange={this.updateForm}/>
-                    </FormControl>
-                    <FormControl>
-                        <TextField
-                            label="Last Name"
-                            id="lastname"
-                            type="text"
-                            name="lastname"
-                            onChange={this.updateForm}/>
-                    </FormControl>
-                    <FormControl>
-                        <TextField
-                            label="Email"
-                            id="email"
-                            type="email"
-                            name="email"
+                            name="username"
                             onChange={this.updateForm}/>
                     </FormControl>
                     <FormControl>
