@@ -64,7 +64,7 @@ class Home extends Component{
             .then(res=>{
                 // res.json('wait until file downloaded!')
                 console.log(res,'React response')
-                FileDownload(res.data, 'ReactExpress.zip');
+                FileDownload(res.data, 'codeBase.zip');
             })
     }
     authentication(val){
