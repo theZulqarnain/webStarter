@@ -20,6 +20,13 @@ router.post('/zip', function(req, res){
 		commands.push("sed -i '/github start/,/github end/d' duplicate/ReactExpress/routes/auth.js");
 	}
 
+	// if(!req.body.jade){
+	// 	//add command to commands array
+	// }
+	// if(!req.body.ejs){
+	// 	//add command to commands array
+	// }
+
 	commands.push('zip -r ReactExpress.zip duplicate  -x "ReactExpress/node_modules/*" "ReactExpress/reactApp/node_modules/*"');
 
 	for(var i=0;i<commands.length;i++){
@@ -35,6 +42,8 @@ router.post('/zip', function(req, res){
 		  }
     });
 	}
+
+
 });
 
 //
