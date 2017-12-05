@@ -22,7 +22,7 @@ module.exports = {
                 target: {
                     host: "0.0.0.0",
                     protocol: 'http:',
-                    port: 8080
+                    port: 8001
                 },
                 pathRewrite: {
                     '^/api': ''
