@@ -139,7 +139,7 @@ class Home extends Component{
                                    <p>React</p>
                                </a>
                            </li>
-                           <li className="active liMargin" onClick={()=>{this.authentication('mongoDB')}} >
+                           <li className="active liMargin" onClick={()=>{this.authentication('vue')}} >
                                <a href="#schedule" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/vue-9.svg" width="70px" height="70px" alt="Vue"/>
                                    <p>Vue</p>
