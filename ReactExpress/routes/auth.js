@@ -113,7 +113,7 @@ router.get('/app/current_user',(req,res)=>{
 passport.use(new FacebookStrategy({
         clientID: keys.facebookClientID,
         clientSecret: keys.facebookClientSecret,
-        callbackURL: "/auth/facebook/callback"
+        callbackURL: "http://localhost:8080/auth/facebook/callback"
     },
     ( accessToken,refreshToken,profile,done) =>{
         console.log(accessToken, refreshToken, done);
@@ -148,7 +148,7 @@ router.get('/facebook/callback',passport.authenticate('facebook'),
 passport.use(new GitHubStrategy({
         clientID: keys.githubClientID,
         clientSecret: keys.githubClientSecret,
-        callbackURL: "/auth/github/callback"
+        callbackURL: "http://localhost:8080/auth/github/callback"
     },
     ( accessToken,refreshToken,profile,done) =>{
         console.log(accessToken, refreshToken, done);

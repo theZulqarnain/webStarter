@@ -82,13 +82,10 @@ class login extends Component{
                     <Typography type="display1" gutterBottom >
                         Social Login
                     </Typography>
-                    <Button raised dense onClick={this.GoogleloginHandler}>
-                        Google
-                    </Button>
-                    <Button raised dense onClick={this.fbloginHandler}>
-                        Facebook
-                    </Button>
-                    <a href="/api/auth/google">Google</a>
+
+                    <a href="/api/auth/google"><Button>Google</Button></a>
+                    <a href="/api/auth/facebook"><Button>Facebook</Button></a>
+                    <a href="/api/auth/github"><Button>Github</Button></a>
 
                 </div>
                 {this.props.loggedState ?
