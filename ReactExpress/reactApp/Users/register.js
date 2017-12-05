@@ -23,7 +23,7 @@ class register extends Component{
     registerFormHandler(){
         axios.post(`/api/auth/register`,{username:this.state.username,password:this.state.password})
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 if(res.data){
                     this.setState({
                         isRegistered:res.data
