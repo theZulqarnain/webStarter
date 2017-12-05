@@ -60,7 +60,7 @@ class Home extends Component{
             })
     }
     downloader(){
-        axios.post('/api/download/zip',{authentication:this.state.authentication})
+        axios.post('/api/download/zip',this.state )
             .then(res=>{
                 // res.json('wait until file downloaded!')
                 console.log(res,'React response')
