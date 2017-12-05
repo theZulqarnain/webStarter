@@ -88,8 +88,8 @@ class login extends Component{
                     <Button raised dense onClick={this.fbloginHandler}>
                         Facebook
                     </Button>
-                    <a href="/api/auth/google/callback">Google</a>
-                    <a href="/api/auth/google/callback">facebook</a>
+                    <a href="/api/auth/google">Google</a>
+
                 </div>
                 {this.props.loggedState ?
                     <Redirect to='/'/>

@@ -47,6 +47,7 @@ router.post('/login',passport.authenticate('local',
 //sending value to React
 router.get('/isLoggedin',function (req, res) {
     res.json({isLoggedin:true});
+    // res.redirect("http://localhost:8000/#/", {isLoggedin:true});
 })
 
 // logout route
@@ -64,7 +65,7 @@ passport.use(new GoogleStrategy(
     {
         clientID    :   keys.googleClientID,
         clientSecret:   keys.googleClientSecret,
-        callbackURL :   '/auth/google/callback'
+        callbackURL :   'http://localhost:8080/auth/google/callback'
     },
     ( accessToken,refreshToken,profile,done) =>{
         console.log(accessToken, refreshToken, done);
@@ -90,7 +91,8 @@ router.get(
     }));
 router.get('/google/callback',passport.authenticate('google'),
     (req, res) => {
-        res.redirect('/auth/isLoggedin');
+        // res.redirect('/auth/isLoggedin');
+        res.redirect("http://localhost:8000/#/");
     }
 );
 router.get('/app/current_user',(req,res)=>{
