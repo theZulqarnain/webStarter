@@ -7,19 +7,15 @@ var bodyParser = require('body-parser');
 var mongoose      = require('mongoose'),
     passport       = require('passport'),
     LocalStrategy = require('passport-local'),
-    // User          = require('./models/user'),
+    User          = require('./models/user'),
     cookieSession   =   require('cookie-session'),
     keys            =   require('./config/keys'),
     session         =   require('express-session'),
     env             = require('dotenv').load()
 
 var index = require('./routes/index');
-// var users = require('./routes/users');
-// var auth = require('./routes/auth');
+var auth = require('./routes/auth');
 
-//mysql requires
-var Mauth=require('./routes/M_auth')
-var Sauth=require('./routes/Sauth')
 
 var app = express();
 
@@ -39,58 +35,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Passport Config
-app.use(require('express-session')({
-    secret:'this is abdulla zulqarnain',
-    resave:false,
-    saveUninitialized:true
-}));
-// app.use(
-//     cookieSession({
-//         maxAge: 30 * 24 * 60 * 60 * 1000,
-//         keys: [keys.cookieKey]
-//     })
-// );
+// app.use(require('express-session')({
+//     secret:'this is abdulla zulqarnain',
+//     resave:false,
+//     saveUninitialized:true
+// }));
+app.use(
+    cookieSession({
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        keys: [keys.cookieKey]
+    })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-
-//Models
-var models = require("./Smodels/index");
 
 //Routes
 
 app.use('/', index);
-// app.use('/users', users);
-// app.use('/auth',auth);
-app.use('/Mauth',Mauth);
-app.use('/Sauth',Sauth);
-
-
-//load passport strategies
-
-require('./services/passport.js')(passport, models.user);
-
-///////////////////////////////Sequelize////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//Sync Database
-models.sequelize.sync().then(function() {
-
-    console.log('Nice! Database looks fine')
-
-}).catch(function(err) {
-
-    console.log(err, "Something went wrong with the Database Update!")
-
-});
-
-
-/////////////////////////End Sequelize/////////////////////////////////////////////////////////////////
+app.use('/auth',auth);
 
 //catch 404    and forward to error handler
 app.use(function(req, res, next) {
