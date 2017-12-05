@@ -22,7 +22,7 @@ class register extends Component{
 
     registerFormHandler(){
         // console.log('entered')
-        axios.post(`/api/auth/register`,{username:this.state.username,password:this.state.password})
+        axios.post(`/api/auth/register`,{firstname:this.state.firstname,lastname:this.state.lastname,email:this.state.email,password:this.state.password})
             .then(res => {
                 if(res.data){
                     this.setState({
@@ -51,10 +51,26 @@ class register extends Component{
                     </Typography>
                     <FormControl>
                         <TextField
-                            label="Name"
-                            id="name"
+                            label="First Name"
+                            id="firstname"
                             type="text"
-                            name="username"
+                            name="firstname"
+                            onChange={this.updateForm}/>
+                    </FormControl>
+                    <FormControl>
+                        <TextField
+                            label="Last Name"
+                            id="lastname"
+                            type="text"
+                            name="lastname"
+                            onChange={this.updateForm}/>
+                    </FormControl>
+                    <FormControl>
+                        <TextField
+                            label="Email"
+                            id="email"
+                            type="email"
+                            name="email"
                             onChange={this.updateForm}/>
                     </FormControl>
                     <FormControl>

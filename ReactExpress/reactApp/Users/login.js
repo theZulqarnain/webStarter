@@ -36,7 +36,7 @@ class login extends Component{
 
     loginHandler(){
         // console.log('entered')
-        axios.post(`/api/auth/login`,{username:this.state.username,password:this.state.password})
+        axios.post(`/api/auth/login`,{email:this.state.email,password:this.state.password})
             .then(res => {
                 this.props.isLoggedIn(res.data.isLoggedin)
             });
@@ -59,10 +59,10 @@ class login extends Component{
                     </Typography>
                     <FormControl>
                         <TextField
-                            label="Name"
-                            id="name"
-                            type="text"
-                            name="username"
+                            label="Email"
+                            id="email"
+                            type="email"
+                            name="email"
                             onChange={this.updateForm}/>
                     </FormControl>
                     <FormControl>

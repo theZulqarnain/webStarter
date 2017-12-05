@@ -1,12 +1,20 @@
+module.exports = function(user){
 const   express         =   require('express'),
         passport        =   require('passport'),
         GoogleStrategy  =   require('passport-google-oauth20').Strategy,
         app             =   express(),
         keys            =   require('../config/keys'),
-        router          =   express.Router();
-        User            =   require('../models/user'),
+        router          =   express.Router(),
         FacebookStrategy=   require('passport-facebook').Strategy,
-        GitHubStrategy  =   require('passport-github2').Strategy
+        GitHubStrategy  =   require('passport-github2').Strategy;
+
+        var User;
+
+        if(user){
+            User = user
+        }else{
+            require('../models/user');
+        }
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -24,37 +32,35 @@ passport.deserializeUser((id, done) => {
 //Local Strategy
 
 
-//Registering user
-router.post('/register', function(req, res, next) {
-    var newUser = new User({username:req.body.username})
-    User.register(newUser,req.body.password,function (err, user) {
-        if(err){
-            return res.render(err)
-        }
-        passport.authenticate("local")(req,res,function () {
-            res.json({isRegistered:true})
-        })
+    /* GET users listing. */
+    router.post('/register',isLoggedIn, passport.authenticate('local-signup',  {
+        successRedirect: '/api/',
+        failureRedirect: '/api/register'}
+    ));
+
+    router.post('/login',isLoggedIn,passport.authenticate('local-signin',  {
+        successRedirect: '/api/auth/isLoggedIn',
+        failureRedirect: '/api'}
+    ));
+    router.get('/isLoggedin',isLoggedIn,function (req, res) {
+        res.json({isLoggedin:true});
     })
-});
-//Logging User
-router.post('/login',passport.authenticate('local',
-    {
-        successRedirect: '/api/auth/isLoggedin',
-        failureRedirect: '/',
-    }),function (req,res) {
-
-});
-//sending value to React
-router.get('/isLoggedin',function (req, res) {
-    res.json({isLoggedin:true});
-})
-
 // logout route
-router.get('/logout',function (req,res) {
-    req.logout();
-    res.json({})
-})
+    router.get('/logout',function (req,res) {
+        req.logout();
+        // req.session.destroy()
+        res.send('logout.....')
+        // res.redirect()
+    })
 
+    function isLoggedIn(req,res,next) {
+        if(req.isAuthenticated()){
+            return next();
+        }
+
+        res.json({isLoggedin:"false"})
+
+    }
 
 /*google start*/
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,13 +73,13 @@ passport.use(new GoogleStrategy(
         callbackURL :   '/auth/google/callback'
     },
     ( accessToken,refreshToken,profile,done) =>{
-        console.log(accessToken, refreshToken, done);
-        User.findOne({googleId:profile.id})
+        console.log(profile);
+        User.findOne({where:{googleId:profile.id}})
             .then(existingUser=>{
                 if(existingUser){
                     done(null,existingUser)
                 }else{
-                    new User({googleId:profile.id})
+                    new User({googleId:profile.id,username:profile.displayName})
                         .save()
                         .then(user=>done(null,user))
 
@@ -114,13 +120,13 @@ passport.use(new FacebookStrategy({
         callbackURL: "/auth/facebook/callback"
     },
     ( accessToken,refreshToken,profile,done) =>{
-        console.log(accessToken, refreshToken, done);
-        User.findOne({facebookId:profile.id})
+        console.log(profile);
+        User.findOne({where:{facebookId:profile.id}})
             .then(existingUser=>{
                 if(existingUser){
                     done(null,existingUser)
                 }else{
-                    new User({facebookId:profile.id})
+                    new User({facebookId:profile.id,username:profile.displayName})
                         .save()
                         .then(user=>done(null,user))
 
@@ -149,13 +155,13 @@ passport.use(new GitHubStrategy({
         callbackURL: "/auth/github/callback"
     },
     ( accessToken,refreshToken,profile,done) =>{
-        console.log(accessToken, refreshToken, done);
-        User.findOne({githubId:profile.id})
+        console.log(profile);
+            User.findOne({where:{githubId:profile.id}})
             .then(existingUser=>{
                 if(existingUser){
                     done(null,existingUser)
                 }else{
-                    new User({githubId:profile.id})
+                    new User({githubId:profile.id,username:profile.displayName})
                         .save()
                         .then(user=>done(null,user))
 
@@ -175,4 +181,9 @@ router.get('/github/callback',
         res.redirect('/auth/isLoggedin');
     });
 /*github end*/
-module.exports = router;
+// module.exports = router;
+
+
+
+    return router;
+}
