@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 const FileDownload = require('react-file-download');
+import classNames from 'classnames';
 
 import classes from './Home.css'
 class Home extends Component{
@@ -67,33 +68,14 @@ class Home extends Component{
                 FileDownload(res.data, 'codeBase.zip');
             })
     }
-    authentication(val){
-        // $("#test").click(function(){
-        //     // $(this).toggleClass("active");
-        //     $(this).find("li").toggleClass('active');
-        // });
-        // $('.menu li').click(function () {
-        //     $('.menu li').toggleClass("active");
-        //     // $(this).addClass('active');
-        // });
+    authenticate(e,data){
 
-
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
         var obj  = {}
-        obj[val] = !this.state[val]
+        obj[data] = !this.state[data]
         this.setState(obj)
         console.log(obj)
-
-        // this.setState({
-        //     authentication:val
-        // },function () {
-        //
-        //     // if(className==="active"){
-        //     //     {className=null}
-        //     // }else{
-        //     //     className="active"
-        //     // }
-        // })
-        // console.log(this.state.authentication)
     }
     componentDidMount(){
         this.Home();
@@ -201,29 +183,30 @@ class Home extends Component{
 
                        <ul className="nav nav-pills menu" role="tablist">
 
-                           <li className="liMargin" id="test" onClick={()=>{this.authentication('facebook')}}>
-                               <a href="#dashboard" role="tab" data-toggle="tab" >
+                           <li id="test"  className={classNames({active: this.state.facebook, liMargin: true})} onClick={(e) => this.authenticate(e, "facebook")}>
+                               <a href="#FaceBook" role="tab" data-toggle="tab" >
                                    <img src="./assets/icons/facebook-icon.svg" width="70px" height="70px" alt="React"/>
                                    <p>FaceBook</p>
                                </a>
                            </li>
-                       </ul>
-                       <ul className="nav nav-pills" role="tablist">
-                           <li className="liMargin" onClick={()=>{this.authentication('google')}} >
-                               <a href="#schedule" role="tab" data-toggle="tab">
-                                   <img src="./assets/icons/google-icon.svg" width="70px" height="70px" alt="React"/>
+
+                           <li onClick={(e)=>{this.authenticate(e, 'google')}} className= {classNames({active: this.state.google, liMargin: true})} >
+                               <a href="#Google" role="tab" data-toggle="tab">
+                                   <img src="./assets/icons/google-icon.svg" width="70px" height="70px" alt="Google"/>
                                    <p>Google</p>
                                </a>
                            </li>
-                           <li className="liMargin" onClick={()=>{this.authentication('twitter')}}>
-                               <a href="#tasks" role="tab" data-toggle="tab">
-                                   <img src="./assets/icons/twitter-3.svg" width="70px" height="70px" alt="React"/>
+
+                           <li onClick={(e)=>{this.authenticate(e,'twitter')}} className= {classNames({active: this.state.twitter, liMargin: true})} >
+                               <a href="#Twitter" role="tab" data-toggle="tab">
+                                   <img src="./assets/icons/twitter-3.svg" width="70px" height="70px" alt="Twitter"/>
                                    <p>Twitter</p>
                                </a>
                            </li>
-                           <li className="liMargin" onClick={()=>{this.authentication('github')}}>
-                               <a href="#payments" role="tab" data-toggle="tab">
-                                   <img src="./assets/icons/github-icon-1.svg" width="70px" height="70px" alt="React"/>
+
+                           <li onClick={(e)=>{this.authenticate(e,'github')}} className= {classNames({active: this.state.github, liMargin: true})} >
+                               <a href="#Github" role="tab" data-toggle="tab">
+                                   <img src="./assets/icons/github-icon-1.svg" width="70px" height="70px" alt="github"/>
                                    Github
                                </a>
                            </li>
