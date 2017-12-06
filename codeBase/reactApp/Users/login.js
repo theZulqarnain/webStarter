@@ -33,7 +33,13 @@ class login extends Component{
                 this.props.isLoggedIn(res.data.isLoggedin)
             });
     }
-
+    githubloginHandler(){
+        axios.get(`/api/auth/github`)
+            .then(res => {
+                console.log(res.data);
+                this.props.isLoggedIn(res.data.isLoggedin)
+            });
+    }
     loginHandler(){
         // console.log('entered')
         axios.post(`/api/auth/login`,{username:this.state.username,password:this.state.password})
@@ -88,8 +94,10 @@ class login extends Component{
                     <Button raised dense onClick={this.fbloginHandler}>
                         Facebook
                     </Button>
-                    <a href="/api/auth/google/callback">Google</a>
-                    <a href="/api/auth/google/callback">facebook</a>
+                    <Button raised dense onClick={this.githubloginHandler}>
+                        Github
+                    </Button>
+
                 </div>
                 {this.props.loggedState ?
                     <Redirect to='/'/>
