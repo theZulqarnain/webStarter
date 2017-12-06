@@ -72,6 +72,7 @@ router.post('/zip', function(req, res){
 
 				if(commands.length == i+1){
           var file = path.join (__dirname, '/../codeBase.zip');
+          // var file = __dirname + '/../codeBase.zip';
           console.log(file);
           setTimeout(function(){
 
