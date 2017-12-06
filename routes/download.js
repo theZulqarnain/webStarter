@@ -40,12 +40,23 @@ router.post('/zip', function(req, res){
   } else {
 	  if(!req.body.jade){
 		  commands.push("sed -i '/jade start/,/jade end/d' duplicate/codeBase/app.js");
+		  commands.push("find duplicate/codeBase/views/*.jade -delete");
 		  commands.push("rm -rf duplicate/codeBase/reactApp");
 	  }
 	  if(!req.body.ejs){
-		  commands.push("sed -i '/ejs start/,/ejs end/d' duplicate/codeBase/app.js")
+		  commands.push("sed -i '/ejs start/,/ejs end/d' duplicate/codeBase/app.js");
+		  commands.push("find duplicate/codeBase/views/*.ejs -delete")
 		  commands.push("rm -rf duplicate/codeBase/reactApp");
 	  }
+  }
+
+  if(req.body.jade){
+		commands.push('cp duplicate/codeBase/reactApp/Users/login.js duplicate/codeBase/views/login.jade');
+		commands.push('cp duplicate/codeBase/reactApp/Users/register.js duplicate/codeBase/views/register.jade');
+  }
+  if(req.body.ejs){
+	  commands.push('cp duplicate/codeBase/reactApp/Users/login.js duplicate/codeBase/views/login.ejs');
+	  commands.push('cp duplicate/codeBase/reactApp/Users/register.js duplicate/codeBase/views/register.ejs');
   }
 
 
