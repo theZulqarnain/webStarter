@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import { Switch, Route } from 'react-router-dom'
-import App from "./App.jsx"
-import Register from './Users/register'
-import Login from './Users/login'
-import Header from './Header'
+import App from "./App"
+import Register from '../Users/register'
+import Login from '../Users/login'
+import Header from '../Header'
 
 class Main extends Component {
     constructor(props) {
