@@ -6,17 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
-var download = require('./routes/download')
+var download = require('./routes/download');
 
 var app = express();
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
-
-//eJS Setup
-app.engine('ejs', require('ejs').renderFile);
-app.set('view engine', 'ejs');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

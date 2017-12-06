@@ -14,22 +14,40 @@ router.post('/zip', function(req, res){
   var commands =[];
   commands[0]= 'rm -rf duplicate/ && rsync -arv --exclude=codeBase/node_modules --exclude=codeBase/reactApp/node_modules codeBase duplicate/ '
 
-  // if(!req.body.facebook){
-   //  commands.push("sed -i '/facebook start/,/facebook end/d' duplicate/codeBase/routes/auth.js");
-  // }
-	// if(!req.body.google){
-	// 	commands.push("sed -i '/google start/,/google end/d' duplicate/codeBase/routes/auth.js");
-	// }
-	// if(!req.body.github){
-	// 	commands.push("sed -i '/github start/,/github end/d' duplicate/codeBase/routes/auth.js");
-	// }
-  //
-  // if(!req.body.mongodb){
-  //   commands.push("sed -i '/MONGOOSE START/,/MONGOOSE END/d' duplicate/codeBase/routes/auth.js")
-  // }
-  // if(!req.body.mysql){
-		// commands.push("sed -i '/SEQUELIZE START/,/SEQUELIZE END/d' duplicate/codeBase/routes/auth.js")
-  // }
+  if(!req.body.facebook){
+    commands.push("sed -i '/facebook start/,/facebook end/d' duplicate/codeBase/routes/auth.js");
+  }
+  if(!req.body.google){
+  	commands.push("sed -i '/google start/,/google end/d' duplicate/codeBase/routes/auth.js");
+  }
+  if(!req.body.github){
+  	commands.push("sed -i '/github start/,/github end/d' duplicate/codeBase/routes/auth.js");
+  }
+
+  if(!req.body.mongodb){
+    commands.push("sed -i '/MONGOOSE START/,/MONGOOSE END/d' duplicate/codeBase/routes/auth.js");
+    commands.push("sed -i '/mongoose start/,/mongoose end/d' duplicate/codeBase/models/user.js");
+  }
+  if(!req.body.mysql){
+		commands.push("sed -i '/SEQUELIZE START/,/SEQUELIZE END/d' duplicate/codeBase/routes/auth.js");
+		commands.push("sed -i '/sequel start/,/sequel end/d' duplicate/codeBase/models/user.js");
+	  commands.push("rm -rf duplicate/codeBase/models/index.js");
+  }
+  if(req.body.react){
+	  commands.push("sed -i '/jade start/,/jade end/d' duplicate/codeBase/app.js");
+	  commands.push("sed -i '/ejs start/,/ejs end/d' duplicate/codeBase/app.js");
+	  commands.push("rm -rf duplicate/codeBase/views");
+  } else {
+	  if(!req.body.jade){
+		  commands.push("sed -i '/jade start/,/jade end/d' duplicate/codeBase/app.js");
+		  commands.push("rm -rf duplicate/codeBase/reactApp");
+	  }
+	  if(!req.body.ejs){
+		  commands.push("sed -i '/ejs start/,/ejs end/d' duplicate/codeBase/app.js")
+		  commands.push("rm -rf duplicate/codeBase/reactApp");
+	  }
+  }
+
 
 	commands.push('zip -r codeBase.zip duplicate  -x "codeBase/node_modules/*" "codeBase/reactApp/node_modules/*"');
 
