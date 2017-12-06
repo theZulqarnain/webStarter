@@ -1,7 +1,5 @@
-import React, {Component} from 'react'
-import { Route, Redirect } from 'react-router'
-import Header from '../Header'
-import Input, { InputLabel } from 'material-ui/Input';
+import React, {Component} from 'react';
+import { Route, Redirect } from 'react-router';
 import TextField from 'material-ui/TextField';
 import { FormControl } from 'material-ui/Form';
 import Typography from 'material-ui/Typography';
