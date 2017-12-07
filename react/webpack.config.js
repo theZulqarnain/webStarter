@@ -16,13 +16,13 @@ module.exports = {
     },
     devServer: {
         inline: true,
-        port: 8000,
+        port: 10001,
         proxy: {
             '/api': {
                 target: {
                     host: "0.0.0.0",
                     protocol: 'http:',
-                    port: 8001
+                    port: 10000
                 },
                 pathRewrite: {
                     '^/api': ''
