@@ -6,7 +6,13 @@ import classNames from 'classnames';
 class Home extends Component{
     constructor(props){
         super(props)
-        this.state={}
+        this.state={
+            database:{mongodb:true},
+            frontend:{react : true},
+            backend:{express: true},
+            authentication:{google: true},
+            css:{material: true}
+        }
         this.downloader=this.downloader.bind(this);
     }
 
@@ -29,14 +35,29 @@ class Home extends Component{
                 FileDownload(res.data, 'codeBase.zip');
             })
     }
-    authenticate(e,data){
+    authenticate(e, stack, option, multi){
 
-        e.stopPropagation();
-        e.nativeEvent.stopImmediatePropagation();
-        var obj  = {}
-        obj[data] = !this.state[data]
-        this.setState(obj)
-        console.log(obj)
+        var obj = {};
+
+        if(multi){
+            e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
+        var t ={}
+            t= {...this.state[stack]}
+
+            obj[stack] = t;
+
+            obj[stack][option] = !obj[stack][option]
+        }else{
+
+            obj[stack] = {};
+            obj[stack][option]= true
+        }
+
+
+        this.setState(obj, function(){
+            console.log(this.state)
+        })
     }
     componentDidMount(){
         this.Home();
@@ -53,14 +74,14 @@ class Home extends Component{
 
                        <ul className="nav nav-pills" role="tablist">
 
-                           <li onClick={(e)=>{this.authenticate(e,  'mongodb')}} className={classNames({active: this.state.mongodb, liMargin: true})}>
+                           <li onClick={(e)=>{this.authenticate(e,"database",'mongodb', false)}} className="liMargin active">
 
-                               <a href="#dashboard" role="tab" data-toggle="tab">
+                               <a href="#mongodb" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/mongodb.svg" width="70px" height="70px" alt="MongoDB"/>
                                    <p>MongoDB</p>
                                </a>
                            </li>
-                           <li onClick={(e)=>{this.authenticate(e,'mysql')}} className={classNames({active: this.state.mysql, liMargin: true})} >
+                           <li onClick={(e)=>{this.authenticate(e,"database",'mysql', false)}} className="liMargin">
                                <a href="#mysql" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/mysql.svg" width="70px" height="70px" alt="mysql"/>
                                    <p>MySQL</p>
@@ -76,31 +97,31 @@ class Home extends Component{
 
                        <ul className="nav nav-pills" role="tablist">
 
-                           <li  onClick={(e)=>{this.authenticate(e,'react')}} className={classNames({active: this.state.react, liMargin: true})}>
+                           <li  onClick={(e)=>{this.authenticate(e,'frontend','react', false)}} className="liMargin">
                                <a href="#react" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/react.svg" width="70px" height="70px" alt="React"/>
                                    <p>React</p>
                                </a>
                            </li>
-                           <li onClick={(e)=>{this.authenticate(e,'vue')}} className={classNames({active: this.state.vue, liMargin: true})}>
+                           <li onClick={(e)=>{this.authenticate(e,'frontend','vue', false)}} className="liMargin">
                                <a href="#vue" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/vue-9.svg" width="70px" height="70px" alt="Vue"/>
                                    <p>Vue</p>
                                </a>
                            </li>
-                           <li  onClick={(e)=>{this.authenticate(e,'angular')}} className={classNames({active: this.state.angular, liMargin: true})}>
+                           <li  onClick={(e)=>{this.authenticate(e,'frontend','angular', false)}} className="liMargin">
                                <a href="#tasks" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/angular-icon-1.svg" width="70px" height="70px" alt="angular"/>
                                    <p>Angular</p>
                                </a>
                            </li>
-                           <li onClick={(e)=>{this.authenticate(e,'jade')}} className={classNames({active: this.state.jade, liMargin: true})}>
+                           <li onClick={(e)=>{this.authenticate(e,'frontend','jade', false)}} className="liMargin">
                                <a href="#jade" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/jade-3.svg" width="70px" height="70px" alt="Jade"/>
                                    <p>Jade</p>
                                </a>
                            </li>
-                           <li onClick={(e)=>{this.authenticate(e,'ejs')}} className={classNames({active: this.state.ejs, liMargin: true})}>
+                           <li onClick={(e)=>{this.authenticate(e,'frontend','ejs', false)}} className="liMargin">
                                <a href="#ejs" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/ejs.png" width="70px" height="70px" alt="Ejs"/>
                                    <p>Ejs</p>
@@ -116,28 +137,28 @@ class Home extends Component{
 
                        <ul className="nav nav-pills" role="tablist">
 
-                           <li onClick={(e)=>{this.authenticate(e,'express')}} className={classNames({active: this.state.express, liMargin: true})}>
-                               <a href="#dashboard" role="tab" data-toggle="tab">
+                           <li onClick={(e)=>{this.authenticate(e,'backend','express', false)}} className="liMargin">
+                               <a href="#express" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/express-109.svg" width="70px" height="70px" alt="Express"/>
                                    <p>Express</p>
                                </a>
                            </li>
-                           <li onClick={(e)=>{this.authenticate(e,'sails')}} className={classNames({active: this.state.sails, liMargin: true})} >
+                           <li onClick={(e)=>{this.authenticate(e,'backend','sails', false)}} className="liMargin">
                                <a href="#sails" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/sails.svg" width="70px" height="70px" alt="sails"/>
                                    <p>Sails</p>
                                </a>
                            </li>
-                           <li onClick={(e)=>{this.authenticate(e,'meteor')}} className={classNames({active: this.state.meteor, liMargin: true})}>
+                           <li onClick={(e)=>{this.authenticate(e,'backend','meteor', false)}} className="liMargin">
                                <a href="#meteor" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/meteor-5.svg" width="70px" height="70px" alt="meteor"/>
                                    <p>Meteor</p>
                                </a>
                            </li>
-                           <li onClick={(e)=>{this.authenticate(e,'hapi')}} className={classNames({active: this.state.hapi, liMargin: true})}>
+                           <li onClick={(e)=>{this.authenticate(e,'backend','hapi', false)}} className="liMargin">
                                <a href="#hapi" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/hapi.svg" width="70px" height="70px" alt="hapi"/>
-                                   Hapi
+                                   <p>Hapi</p>
                                </a>
                            </li>
                        </ul>
@@ -150,28 +171,28 @@ class Home extends Component{
 
                        <ul className="nav nav-pills menu" role="tablist">
 
-                           <li id="test"  className={classNames({active: this.state.facebook, liMargin: true})} onClick={(e) => this.authenticate(e, "facebook")}>
+                           <li id="test"  className={classNames({active: this.state.authentication && this.state.authentication.facebook, liMargin: true})} onClick={(e) => this.authenticate(e,"authentication",  "facebook", true)}>
                                <a href="#FaceBook" role="tab" data-toggle="tab" >
                                    <img src="./assets/icons/facebook-icon.svg" width="70px" height="70px" alt="React"/>
                                    <p>FaceBook</p>
                                </a>
                            </li>
 
-                           <li onClick={(e)=>{this.authenticate(e, 'google')}} className= {classNames({active: this.state.google, liMargin: true})} >
+                           <li onClick={(e)=>{this.authenticate(e,"authentication", 'google', true)}} className= {classNames({active: this.state.authentication&&  this.state.authentication.google, liMargin: true})} >
                                <a href="#Google" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/google-icon.svg" width="70px" height="70px" alt="Google"/>
                                    <p>Google</p>
                                </a>
                            </li>
 
-                           <li onClick={(e)=>{this.authenticate(e,'twitter')}} className= {classNames({active: this.state.twitter, liMargin: true})} >
+                           <li onClick={(e)=>{this.authenticate(e,"authentication", 'twitter', true)}} className= {classNames({active: this.state.authentication && this.state.authentication.twitter, liMargin: true})} >
                                <a href="#Twitter" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/twitter-3.svg" width="70px" height="70px" alt="Twitter"/>
                                    <p>Twitter</p>
                                </a>
                            </li>
 
-                           <li onClick={(e)=>{this.authenticate(e,'github')}} className= {classNames({active: this.state.github, liMargin: true})} >
+                           <li onClick={(e)=>{this.authenticate(e,"authentication", 'github', true)}} className= {classNames({active: this.state.authentication && this.state.authentication.github, liMargin: true})} >
                                <a href="#Github" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/github-icon-1.svg" width="70px" height="70px" alt="github"/>
                                    <p>Github</p>
@@ -187,19 +208,19 @@ class Home extends Component{
 
                        <ul className="nav nav-pills" role="tablist">
 
-                           <li onClick={(e)=>{this.authenticate(e,'bootstrap')}} className={classNames({active: this.state.bootstrap, liMargin: true})}>
+                           <li onClick={(e)=>{this.authenticate(e,'css','bootstrap', false)}} className='liMargin'>
                                <a href="#bootstrap" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/bootstrap-icon.svg" width="70px" height="70px" alt="bootstrap"/>
                                    <p>Bootstrap</p>
                                </a>
                            </li>
-                           <li onClick={(e)=>{this.authenticate(e,'materialui')}} className={classNames({active: this.state.materialui, liMargin: true})}>
+                           <li onClick={(e)=>{this.authenticate(e,'css','materialui', false)}} className="liMargin">
                                <a href="#materailUI" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/material-ui.svg" width="70px" height="70px" alt="material ui"/>
                                    <p>Material UI</p>
                                </a>
                            </li>
-                           <li onClick={(e)=>{this.authenticate(e,'semanticui')}} className={classNames({active: this.state.semanticui, liMargin: true})}>
+                           <li onClick={(e)=>{this.authenticate(e,'css','semanticui', false)}} className="liMargin">
                                <a href="#semanticUI" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/semantic-ui.svg" width="70px" height="70px" alt="semantic ui"/>
                                    <p>Semantic UI</p>
