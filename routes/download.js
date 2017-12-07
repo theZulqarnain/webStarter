@@ -7,7 +7,7 @@ router.post('/zip', function(req, res){
     console.log('express request');
     console.log(req.body)
     // console.log(req.body.authentication);
-  // var file = path.join (__dirname, '/../codeBase.zip');
+  // var arvfile = path.join (__dirname, '/../codeBase.zip');
   // console.log(file);
   // return res.download(file);
 
@@ -39,35 +39,34 @@ router.post('/zip', function(req, res){
   if(req.body.react){
 	  commands.push("sed -i '/jade start/,/jade end/d' duplicate/codeBase/app.js");
 	  commands.push("sed -i '/ejs start/,/ejs end/d' duplicate/codeBase/app.js");
+	  commands.push("rm duplicate/codeBase/public/stylesheets/main.css");
+	  commands.push("sed -i '/ejs,jade start/,/ejs,jade end/d' duplicate/codeBase/routes/auth.js");
+	  commands.push("sed -i '/ejs,jade start/,/ejs,jade end/d' duplicate/codeBase/routes/index.js");
 	  commands.push("rm -rf duplicate/codeBase/views");
   } else {
-	  if(!req.body.jade){
+	  if(req.body.ejs){
 		  commands.push("sed -i '/jade start/,/jade end/d' duplicate/codeBase/app.js");
-		  commands.push("find duplicate/codeBase/views/*.jade -delete");
+		  commands.push("find duplicate/codeBase/views/*.pug -delete");
+		  commands.push("find duplicate/codeBase/views/auth/*.pug -delete");
+		  commands.push("find duplicate/codeBase/views/partials/*.pug -delete");
+		  commands.push("sed -i '/react start/,/react end/d' duplicate/codeBase/routes/auth.js");
+		  commands.push("sed -i '/react start/,/react start/d' duplicate/codeBase/routes/index.js");
 		  commands.push("rm -rf duplicate/codeBase/reactApp");
 	  }
-	  if(!req.body.ejs){
+	  if(req.body.pug){
 		  commands.push("sed -i '/ejs start/,/ejs end/d' duplicate/codeBase/app.js");
-		  commands.push("find duplicate/codeBase/views/*.ejs -delete")
+		  commands.push("find duplicate/codeBase/views/*.ejs -delete");
+		  commands.push("find duplicate/codeBase/views/auth/*.ejs -delete");
+		  commands.push("find duplicate/codeBase/views/partials/*.ejs -delete");
+		  commands.push("sed -i '/react start/,/react end/d' duplicate/codeBase/routes/auth.js");
+		  commands.push("sed -i '/react start/,/react start/d' duplicate/codeBase/routes/index.js");
 		  commands.push("rm -rf duplicate/codeBase/reactApp");
 	  }
   }
-
-  if(req.body.jade){
-		commands.push('cp duplicate/codeBase/reactApp/Users/login.js duplicate/codeBase/views/login.jade');
-		commands.push('cp duplicate/codeBase/reactApp/Users/register.js duplicate/codeBase/views/register.jade');
-  }
-  if(req.body.ejs){
-	  commands.push('cp duplicate/codeBase/reactApp/Users/login.js duplicate/codeBase/views/login.ejs');
-	  commands.push('cp duplicate/codeBase/reactApp/Users/register.js duplicate/codeBase/views/register.ejs');
-  }
-
 
 	commands.push('zip -r codeBase.zip duplicate  -x "codeBase/node_modules/*" "codeBase/reactApp/node_modules/*"');
 
 	// for(var i=0;i<commands.length;i++){
-
-
 	function exec(commands, i){
 
 		if(commands[i]){
@@ -98,12 +97,6 @@ router.post('/zip', function(req, res){
         // }
       });
 		}
-
-
-
-
-
-
   }
 
 
