@@ -31,11 +31,25 @@ class Home extends Component{
 
         var state = this.state
 
-        var url = Object.keys(state).map(function(k) {
-            return encodeURIComponent(k) + '=' + encodeURIComponent(state[k])
-        }).join('&')
+        var serialize = function(obj, prefix) {
+            var str = [], p;
+            for(p in obj) {
+                if (obj.hasOwnProperty(p)) {
+                    var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+                    str.push((v !== null && typeof v === "object") ?
+                        serialize(v, k) :
+                        encodeURIComponent(k) + "=" + encodeURIComponent(v));
+                }
+            }
+            return str.join("&");
+        }
 
-        window.open("/api/download/zip")
+        // window.open("/api/download/zip?"+serialize(state))
+
+        window.open("/api/download/zip?"+serialize(state))
+
+
+
         // axios.get('/api/download/zip',this.state )
         //     .then(res=>{
         //         // res.json('wait until file downloaded!')
