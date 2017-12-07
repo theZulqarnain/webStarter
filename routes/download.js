@@ -23,8 +23,8 @@ router.post('/zip', function(req, res){
 	  commands.push("sed -i '/google button/,/google button end/d' duplicate/codeBase/reactApp/Users/login.js");
   }
   if(!req.body.authentication.github){
-  	commands.push("sed -i `/github start/,/github end/d` duplicate/codeBase/routes/auth.js");
-	  commands.push("sed -i `/github button/,/github button end/d` duplicate/codeBase/reactApp/Users/login.js");
+  	commands.push("sed -i '/github start/,/github end/d' duplicate/codeBase/routes/auth.js");
+	  commands.push("sed -i '/github button/,/github button end/d' duplicate/codeBase/reactApp/Users/login.js");
   }
 
   if(!req.body.database.mongodb){
