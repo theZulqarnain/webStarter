@@ -181,7 +181,8 @@ router.get('/github/callback',
 module.exports = router;
 /*MONGOOSE END*/
 
-/*SEQUELIZE START*/
+/*
+/!*SEQUELIZE START*!/
 module.exports = function(user){
 	const   express         =   require('express'),
 		passport        =   require('passport'),
@@ -216,7 +217,7 @@ module.exports = function(user){
 //Local Strategy
 
 
-	/* GET users listing. */
+	/!* GET users listing. *!/
 	router.post('/register',isLoggedIn, passport.authenticate('local-signup',  {
 		successRedirect: '/api/',
 		failureRedirect: '/api/register'}
@@ -246,7 +247,7 @@ module.exports = function(user){
 
 	}
 
-	/*google start*/
+	/!*google start*!/
 //////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////Google AUTH///////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -293,8 +294,8 @@ module.exports = function(user){
 //     req.logout();
 //     res.send('logging out........')
 // })
-	/*google end*/
-	/*facebook start*/
+	/!*google end*!/
+	/!*facebook start*!/
 //////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////FACEBOOK AUTH///////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -328,8 +329,8 @@ module.exports = function(user){
 			res.redirect('/auth/isLoggedin');
 		}
 	);
-	/*facebook end*/
-	/*github start*/
+	/!*facebook end*!/
+	/!*github start*!/
 //////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////GitHub AUTH///////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -364,11 +365,11 @@ module.exports = function(user){
 			// Successful authentication, redirect home.
 			res.redirect('/auth/isLoggedin');
 		});
-	/*github end*/
+	/!*github end*!/
 // module.exports = router;
 
 
 
 	return router;
 }
-/*SEQUELIZE END*/
+/!*SEQUELIZE END*!/*/
