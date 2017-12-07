@@ -1,0 +1,15 @@
+//- index.pug
+doctype html
+html
+    include ../partials/header.pug
+    body
+        include ../partials/nav.pug
+        h1 Login Form
+        form(action='/auth/login', method='POST')
+            p
+                | username:
+                input(type='text', name='username', value='')
+                | password:
+                input(type='text', name='password', value='')
+            input(type='submit', value='Submit')
+        include ../partials/footer.pug
