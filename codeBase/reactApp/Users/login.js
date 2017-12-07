@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
-import { Route, Redirect } from 'react-router';
+import React, {Component} from 'react'
+import { Route, Redirect } from 'react-router'
+import Header from '../containers/Header'
+import Input, { InputLabel } from 'material-ui/Input';
 import TextField from 'material-ui/TextField';
 import { FormControl } from 'material-ui/Form';
 import Typography from 'material-ui/Typography';
@@ -31,13 +33,7 @@ class login extends Component{
                 this.props.isLoggedIn(res.data.isLoggedin)
             });
     }
-    githubloginHandler(){
-        axios.get(`/api/auth/github`)
-            .then(res => {
-                console.log(res.data);
-                this.props.isLoggedIn(res.data.isLoggedin)
-            });
-    }
+
     loginHandler(){
         // console.log('entered')
         axios.post(`/api/auth/login`,{username:this.state.username,password:this.state.password})
@@ -86,21 +82,14 @@ class login extends Component{
                     <Typography type="display1" gutterBottom >
                         Social Login
                     </Typography>
-                    /*google button*/
                     <Button raised dense onClick={this.GoogleloginHandler}>
                         Google
                     </Button>
-                    /*google button end*/
-                    /*facebook button*/
                     <Button raised dense onClick={this.fbloginHandler}>
                         Facebook
                     </Button>
-                    /*facebook button end*/
-                    /*github button*/
-                    <Button raised dense onClick={this.githubloginHandler}>
-                        Github
-                    </Button>
-                    /*github button end*/
+                    <a href="/api/auth/google/callback">Google</a>
+                    <a href="/api/auth/google/callback">facebook</a>
                 </div>
                 {this.props.loggedState ?
                     <Redirect to='/'/>

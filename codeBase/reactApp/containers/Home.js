@@ -12,9 +12,7 @@ class Home extends Component{
         return(
             <div >
                 <div>
-                    <Typography type="display3" gutterBottom >
-                        Welcome to the Web Starter
-                    </Typography>
+
                 </div>
             </div>
         )
