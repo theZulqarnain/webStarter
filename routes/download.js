@@ -7,7 +7,7 @@ router.post('/zip', function(req, res){
     console.log('express request');
     console.log(req.body)
     // console.log(req.body.authentication);
-  // var file = path.join (__dirname, '/../codeBase.zip');
+  // var arvfile = path.join (__dirname, '/../codeBase.zip');
   // console.log(file);
   // return res.download(file);
 
