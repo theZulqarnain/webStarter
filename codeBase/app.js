@@ -15,6 +15,7 @@ var mongoose      = require('mongoose'),
 
 var index = require('./routes/index');
 var auth = require('./routes/auth');
+var redux = require('./routes/reduxbackend');
 
 
 var app = express();
@@ -24,10 +25,10 @@ app.engine('jade', require('jade').renderFile);
 app.set('view engine', 'jade');
 /*jade end*/
 
-/*ejs start*/
-app.engine('ejs', require('ejs').renderFile);
-app.set('view engine', 'ejs')
-/*ejs end*/
+// /*ejs start*/
+// app.engine('ejs', require('ejs').renderFile);
+// app.set('view engine', 'ejs')
+// /*ejs end*/
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -65,6 +66,8 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/', index);
 app.use('/auth',auth);
 
+app.use('/redux',redux);
+
 //catch 404    and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -80,7 +83,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({err});
 });
 
 app.set('port', process.env.PORT || 8080);
