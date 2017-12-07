@@ -17,6 +17,9 @@ var index = require('./routes/index');
 var auth = require('./routes/auth');
 
 
+
+
+
 var app = express();
 
 /*jade start*/

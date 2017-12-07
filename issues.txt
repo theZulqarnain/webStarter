@@ -1,6 +1,8 @@
 //React-router redirect issue
  1.While doing oAuth(google, facebook, github) we are redirecting to the backend and unable to get back to frontend.
- 
-// File structure is terrible @theZulqarnain
+
 
 //jhave to cache the zip files and donload those if same configuration is requested by multiple users.jj
+
+
+
