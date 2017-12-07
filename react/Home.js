@@ -28,12 +28,20 @@ class Home extends Component{
         }
     }
     downloader(){
-        axios.post('/api/download/zip',this.state )
-            .then(res=>{
-                // res.json('wait until file downloaded!')
-                console.log(res,'React response')
-                FileDownload(res.data, 'codeBase.zip');
-            })
+
+        var state = this.state
+
+        var url = Object.keys(state).map(function(k) {
+            return encodeURIComponent(k) + '=' + encodeURIComponent(state[k])
+        }).join('&')
+
+        window.open("/api/download/zip")
+        // axios.get('/api/download/zip',this.state )
+        //     .then(res=>{
+        //         // res.json('wait until file downloaded!')
+        //         console.log(res,'React response')
+        //         FileDownload(res.data, 'codeBase.zip');
+        //     })
     }
     authenticate(e, stack, option, multi){
 
