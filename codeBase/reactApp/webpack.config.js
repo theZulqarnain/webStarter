@@ -8,13 +8,13 @@ var config = {
     devtool:"#source-map",
     devServer: {
         inline: true,
-        port: 8000,
+        port: 10003,
         proxy: {
             '/api': {
                 target: {
                     host: "0.0.0.0",
                     protocol: 'http:',
-                    port: 8080
+                    port: 10002
                 },
                 pathRewrite: {
                     '^/api': ''
