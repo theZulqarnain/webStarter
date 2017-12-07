@@ -19,9 +19,10 @@ var auth = require('./routes/auth');
 
 var app = express();
 
-/*jade start*/
-app.engine('pug', require('pug').renderFile);
-app.set('view engine', 'pug');
+/*ejs start*/
+app.engine('ejs', require('ejs').renderFile);
+app.set('view engine', 'ejs')
+/*ejs end*/
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
