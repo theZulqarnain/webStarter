@@ -16,17 +16,20 @@ router.post('/zip', function(req, res){
 
   if(!req.body.facebook){
     commands.push("sed -i '/facebook start/,/facebook end/d' duplicate/codeBase/routes/auth.js");
+    commands.push("sed -i '/facebook button/,/facebook button end/d' duplicate/codeBase/reactApp/Users/login.js");
   }
   if(!req.body.google){
   	commands.push("sed -i '/google start/,/google end/d' duplicate/codeBase/routes/auth.js");
+	  commands.push("sed -i '/google button/,/google button end/d' duplicate/codeBase/reactApp/Users/login.js");
   }
   if(!req.body.github){
-  	commands.push("sed -i '/github start/,/github end/d' duplicate/codeBase/routes/auth.js");
+  	commands.push("sed -i `/github start/,/github end/d` duplicate/codeBase/routes/auth.js");
+	  commands.push("sed -i `/github button/,/github button end/d` duplicate/codeBase/reactApp/Users/login.js");
   }
 
   if(!req.body.mongodb){
-    commands.push("sed -i '/MONGOOSE START/,/MONGOOSE END/d' duplicate/codeBase/routes/auth.js");
-    commands.push("sed -i '/mongoose start/,/mongoose end/d' duplicate/codeBase/models/user.js");
+    commands.push("sed -i '/MONGOOSE START/,/MONGOOSE END/d' duplicate/codeBase/routes/auth.js")
+    commands.push("sed -i '/mongoose start/,/mongoose end/d' duplicate/codeBase/models/user.js")
   }
   if(!req.body.mysql){
 		commands.push("sed -i '/SEQUELIZE START/,/SEQUELIZE END/d' duplicate/codeBase/routes/auth.js");

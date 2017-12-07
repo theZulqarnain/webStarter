@@ -86,16 +86,21 @@ class login extends Component{
                     <Typography type="display1" gutterBottom >
                         Social Login
                     </Typography>
+                    /*google button*/
                     <Button raised dense onClick={this.GoogleloginHandler}>
                         Google
                     </Button>
+                    /*google button end*/
+                    /*facebook button*/
                     <Button raised dense onClick={this.fbloginHandler}>
                         Facebook
                     </Button>
+                    /*facebook button end*/
+                    /*github button*/
                     <Button raised dense onClick={this.githubloginHandler}>
                         Github
                     </Button>
-
+                    /*github button end*/
                 </div>
                 {this.props.loggedState ?
                     <Redirect to='/'/>
