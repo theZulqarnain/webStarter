@@ -3,7 +3,16 @@
 
 //jhave to cache the zip files and donload those if same configuration is requested by multiple users.jj
 
+// update package.json based on admin panel options
+
+// Remove 8000 and 8080
+
+// Update pug and ejs files
+
+//
 //package.json file setup
+
+// File structure is terrible @theZulqarnain
 
 
 
