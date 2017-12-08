@@ -11,7 +11,6 @@ const User = require('../models/reduxbackend');
          }
          console.log("saved successfully")
      });
-     console.log("y")
      res.json({success:true})
  });
  router.get('/retrieve',(req,res)=>{
