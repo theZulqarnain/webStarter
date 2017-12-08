@@ -429,10 +429,6 @@ router.post('/login',passport.authenticate('local',
 	}),function (req,res) {
 
 });
-// //sending value to React
-// router.get('/isLoggedin',function (req, res) {
-//     res.json({isLoggedin:true});
-// })
 
 // logout route
 router.get('/logout',function (req,res) {

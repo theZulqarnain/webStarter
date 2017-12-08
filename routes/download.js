@@ -31,7 +31,6 @@ router.get('/zip', function(req, res){
   if(!req.query.database.mysql){
 		commands.push("sed -i '/SEQUELIZE START/,/SEQUELIZE END/d' duplicate/codeBase/routes/auth.js");
 		commands.push("sed -i '/sequel start/,/sequel end/d' duplicate/codeBase/models/user.js");
-	  commands.push("rm -rf duplicate/codeBase/models/index.js");
   }
   if(req.query.frontend.react){
 	  commands.push("sed -i '/jade start/,/jade end/d' duplicate/codeBase/app.js");
@@ -40,6 +39,9 @@ router.get('/zip', function(req, res){
 	  commands.push("sed -i '/ejs,jade start/,/ejs,jade end/d' duplicate/codeBase/routes/auth.js");
 	  commands.push("sed -i '/ejs,jade start/,/ejs,jade end/d' duplicate/codeBase/routes/index.js");
 	  commands.push("rm -rf duplicate/codeBase/views");
+      if(req.query.database.mongodb){
+          commands.push("sed -i '/react start/,/react end/d' duplicate/codeBase/routes/index.js");
+      }
   } else {
 	  if(req.query.frontend.ejs){
 		  commands.push("sed -i '/jade start/,/jade end/d' duplicate/codeBase/app.js");
@@ -49,6 +51,9 @@ router.get('/zip', function(req, res){
 		  commands.push("sed -i '/react start/,/react end/d' duplicate/codeBase/routes/auth.js");
 		  commands.push("sed -i '/react start/,/react start/d' duplicate/codeBase/routes/index.js");
 		  commands.push("rm -rf duplicate/codeBase/reactApp");
+		  if(req.query.database.mongodb){
+              commands.push("sed -i '/ejs,jade start/,/ejs,jade end/d' duplicate/codeBase/routes/index.js");
+          }
 	  }
 	  if(req.query.frontend.pug){
 		  commands.push("sed -i '/ejs start/,/ejs end/d' duplicate/codeBase/app.js");
@@ -58,6 +63,9 @@ router.get('/zip', function(req, res){
 		  commands.push("sed -i '/react start/,/react end/d' duplicate/codeBase/routes/auth.js");
 		  commands.push("sed -i '/react start/,/react start/d' duplicate/codeBase/routes/index.js");
 		  commands.push("rm -rf duplicate/codeBase/reactApp");
+          if(req.query.database.mongodb){
+              commands.push("sed -i '/ejs,jade start/,/ejs,jade end/d' duplicate/codeBase/routes/index.js");
+          }
 	  }
   }
 
