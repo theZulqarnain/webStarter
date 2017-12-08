@@ -47,16 +47,25 @@ router.post('/login',passport.authenticate('local',
 
 });
 //sending value to React
-router.get('/isLoggedin',function (req, res) {
+router.get('/isLoggedin',isLoggedIn,function (req, res) {
     res.json({isLoggedin:true});
 })
 
 // logout route
-router.get('/logout',function (req,res) {
+router.get('/logout',isLoggedIn,function (req,res) {
     req.logout();
     res.json({})
 })
 
+//authentication function
+function isLoggedIn(req,res,next) {
+    if(req.isAuthenticated()){
+        return next();
+    }
+
+    res.json({isLoggedin:"false"})
+
+}
 
 /*google start*/
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,16 +104,7 @@ router.get('/google/callback',passport.authenticate('google'),
         res.redirect('/auth/isLoggedin');
     }
 );
-router.get('/app/current_user',(req,res)=>{
-    // res.json({});
-    res.send(req.user);
-    // console.log(req.user)
-});
 
-// router.get('/app/logout',(req,res)=>{
-//     req.logout();
-//     res.send('logging out........')
-// })
 /*google end*/
 /*facebook start*/
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -217,12 +217,12 @@ module.exports = function(user){
 
 
 	/* GET users listing. */
-	router.post('/register',isLoggedIn, passport.authenticate('local-signup',  {
+	router.post('/register', passport.authenticate('local-signup',  {
 		successRedirect: '/api/',
 		failureRedirect: '/api/register'}
 	));
 
-	router.post('/login',isLoggedIn,passport.authenticate('local-signin',  {
+	router.post('/login',passport.authenticate('local-signin',  {
 		successRedirect: '/api/auth/isLoggedIn',
 		failureRedirect: '/api'}
 	));
