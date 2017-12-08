@@ -1,12 +1,21 @@
 "use strict";
 
-var fs = require("fs");
-var path = require("path");
+var fs        = require("fs");
+var path      = require("path");
 var Sequelize = require("sequelize");
-var env = process.env.NODE_ENV || "development";
-var config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
-var sequelize = new Sequelize(config.database, config.username, config.password, config);
-var db = {};
+var env       = process.env.NODE_ENV || "development";
+// var config    = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
+var sequelize = new Sequelize("webstarter", "root", "", {
+    host: 'localhost',
+    dialect: 'mysql',
+
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }});
+var db  = {};
 
 
 fs
