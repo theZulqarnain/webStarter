@@ -27,8 +27,8 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/download',download);
 app.use('/api/*',function(req,res){
-  console.log( req.originalUrl)
-  res.redirect(req.originalUrl.split("/api")[0])
+  console.log( req.originalUrl.split("/api")[1])
+  res.redirect(req.originalUrl.split("/api")[1])
 });
 
 // catch 404 and forward to error handler
@@ -50,7 +50,7 @@ app.use(function(err, req, res, next) {
 });
 
 //PORT Listen section
-app.set('port', process.env.PORT || 10000);
+app.set('port', process.env.PORT || 10009);
 app.listen(app.get('port'));
 
 module.exports = app;
