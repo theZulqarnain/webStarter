@@ -5,6 +5,7 @@ html
     body
         include ../partials/nav.pug
         h1 Register Form
+        // /*mongoose form start*/
         form(action='/auth/register', method='POST')
             p
                 | username:
@@ -12,4 +13,18 @@ html
                 | password:
                 input(type='text', name='password', value='')
             input(type='submit', value='Submit')
+        // /*mongoose form end*/
+        // /*sequelize form start*/
+        form(action='/auth/register', method='POST')
+            p
+                | firstname:
+                input(type='text', name='firstname', value='')
+                | lastname:
+                input(type='text', name='lastname', value='')
+                | email:
+                input(type='text', name='email', value='')
+                | password:
+                input(type='text', name='password', value='')
+            input(type='submit', value='Submit')
+        // /*sequelize form end*/
         include ../partials/footer.pug

@@ -14,7 +14,7 @@ class login extends Component{
         this.loginHandler=this.loginHandler.bind(this);
         this.GoogleloginHandler=this.GoogleloginHandler.bind(this);
     }
-
+    username
     GoogleloginHandler(){
         console.log('googleHandler')
         axios.get(`/api/auth/google`)
@@ -38,13 +38,22 @@ class login extends Component{
                 this.props.isLoggedIn(res.data.isLoggedin)
             });
     }
+    /*sequel login start*/
     loginHandler(){
-        // console.log('entered')
-        axios.post(`/api/auth/login`,{username:this.state.username,password:this.state.password})
+        axios.post(`/api/auth/login`,{email:this.state.email,password:this.state.password})
             .then(res => {
                 this.props.isLoggedIn(res.data.isLoggedin)
             });
     }
+    /* sequel login end*/
+    /* mongo login start*/
+    loginHandler(){
+        axios.post(`/api/auth/login`,{:this.state.username,password:this.state.password})
+            .then(res => {
+                this.props.isLoggedIn(res.data.isLoggedin)
+            });
+    }
+    /* mongo login end*/
     updateForm(e){
         var obj ={};
         obj[e.target.name] = e.target.value;
@@ -61,12 +70,13 @@ class login extends Component{
                     <Typography type="display1" gutterBottom >
                         Login Form
                     </Typography>
+                    {/*sequel form start*/}
                     <FormControl>
                         <TextField
-                            label="Name"
-                            id="name"
-                            type="text"
-                            name="username"
+                            label="Email"
+                            id="email"
+                            type="email"
+                            name="email"
                             onChange={this.updateForm}/>
                     </FormControl>
                     <FormControl>
@@ -77,30 +87,31 @@ class login extends Component{
                             name="password"
                             onChange={this.updateForm}/>
                     </FormControl>
+                    {/*sequel form end*/}
                     <Button raised dense onClick={this.loginHandler}>
                         <Save  />
-                        Save
+                        Login
                     </Button>
                 </div>
                 <div>
                     <Typography type="display1" gutterBottom >
                         Social Login
                     </Typography>
-                    /*google button*/
+                    {/*google button*/}
                     <Button raised dense onClick={this.GoogleloginHandler}>
                         Google
                     </Button>
-                    /*google button end*/
-                    /*facebook button*/
+                    {/*google button end*/}
+                    {/*facebook button*/}
                     <Button raised dense onClick={this.fbloginHandler}>
                         Facebook
                     </Button>
                     /*facebook button end*/
-                    /*github button*/
+                    {/*github button*/}
                     <Button raised dense onClick={this.githubloginHandler}>
                         Github
                     </Button>
-                    /*github button end*/
+                    {/*github button end*/}
                 </div>
                 {this.props.loggedState ?
                     <Redirect to='/'/>
