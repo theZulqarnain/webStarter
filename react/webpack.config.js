@@ -83,6 +83,11 @@ module.exports = {
     // ],
         // plugins: [
         new UglifyJsPlugin({
+            uglifyOptions: {
+                compress: {
+                    properties: true
+                }
+            },
         include: /\.min\.js$/,
         minimize: true
     })
