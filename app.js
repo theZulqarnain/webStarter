@@ -28,7 +28,7 @@ app.use('/users', users);
 app.use('/download',download);
 app.use('/api/*',function(req,res){
   console.log( req.originalUrl)
-  res.redirect(req.originalUrl.split("api"))
+  res.redirect(req.originalUrl.split("/api")[0])
 });
 
 // catch 404 and forward to error handler
