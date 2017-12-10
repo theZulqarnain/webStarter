@@ -9,7 +9,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
         chunkFilename: '[id].js',
-        publicPath: ''
+        publicPath: '',
+        sourceMapFilename: "./bundle.js.map",
     },
     resolve: {
         extensions: ['.js', '.jsx']
@@ -77,6 +78,13 @@ module.exports = {
         template: __dirname + '/index.html',
         filename: 'index.html',
         inject: 'body'
+    }),
+    // ],
+        // plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+        include: /\.min\.js$/,
+        minimize: true
     })
 ]
+
 };
