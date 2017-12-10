@@ -95,9 +95,9 @@ module.exports = {
     //     include: /\.min\.js$/,
     //     minimize: true
     // })
-],
+// ],
 
-    }),
+    // }),
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
             warnings: false,
