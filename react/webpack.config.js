@@ -11,14 +11,14 @@ module.exports = {
         filename: 'bundle.js',
         chunkFilename: '[id].js',
         publicPath: '',
-        sourceMapFilename: "./bundle.js.map",
+        // sourceMapFilename: "./bundle.js.map",
     },
     resolve: {
         extensions: ['.js', '.jsx']
     },
     devServer: {
         headers: {
-            "Content-Length": "10000",
+            "Content-Length": "100000",
 
         },
         inline: true,
@@ -86,15 +86,15 @@ module.exports = {
     }),
     // ],
         // plugins: [
-        new UglifyJsPlugin({
-            uglifyOptions: {
-                compress: {
-                    properties: true
-                }
-            },
-        include: /\.min\.js$/,
-        minimize: true
-    })
+    //     new UglifyJsPlugin({
+    //         uglifyOptions: {
+    //             compress: {
+    //                 properties: true
+    //             }
+    //         },
+    //     include: /\.min\.js$/,
+    //     minimize: true
+    // })
 ],
 
 };
