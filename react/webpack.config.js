@@ -19,18 +19,18 @@ module.exports = {
     devServer: {
         inline: true,
         port: 10001,
-        proxy: {
-            '/api': {
-                target: {
-                    host: "0.0.0.0",
-                    protocol: 'http:',
-                    port: 10000
-                },
-                pathRewrite: {
-                    '^/api': ''
-                }
-            }
-        }
+        // proxy: {
+        //     '/api': {
+        //         target: {
+        //             host: "0.0.0.0",
+        //             protocol: 'http:',
+        //             port: 10000
+        //         },
+        //         pathRewrite: {
+        //             '^/api': ''
+        //         }
+        //     }
+        // }
     },
     module: {
         rules: [
@@ -91,6 +91,10 @@ module.exports = {
         include: /\.min\.js$/,
         minimize: true
     })
-]
+],
+    headers: {
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+
+}
 
 };
