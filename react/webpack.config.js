@@ -77,6 +77,11 @@ module.exports = {
         template: __dirname + '/index.html',
         filename: 'index.html',
         inject: 'body'
-    })
+    }),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: true,
+            warnings: false,
+            mangle: true
+        })
 ]
 };
