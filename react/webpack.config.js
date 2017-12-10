@@ -1,6 +1,7 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
@@ -9,26 +10,31 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
         chunkFilename: '[id].js',
-        publicPath: ''
+        publicPath: '',
+        // sourceMapFilename: "./bundle.js.map",
     },
     resolve: {
         extensions: ['.js', '.jsx']
     },
     devServer: {
+        headers: {
+            "Content-Length": "100000",
+
+        },
         inline: true,
         port: 10001,
-        proxy: {
-            '/api': {
-                target: {
-                    host: "0.0.0.0",
-                    protocol: 'http:',
-                    port: 10000
-                },
-                pathRewrite: {
-                    '^/api': ''
-                }
-            }
-        }
+        // proxy: {
+        //     '/api': {
+        //         target: {
+        //             host: "0.0.0.0",
+        //             protocol: 'http:',
+        //             port: 10000
+        //         },
+        //         pathRewrite: {
+        //             '^/api': ''
+        //         }
+        //     }
+        // }
     },
     module: {
         rules: [
@@ -77,6 +83,20 @@ module.exports = {
         template: __dirname + '/index.html',
         filename: 'index.html',
         inject: 'body'
+    }),
+    // ],
+        // plugins: [
+    //     new UglifyJsPlugin({
+    //         uglifyOptions: {
+    //             compress: {
+    //                 properties: true
+    //             }
+    //         },
+    //     include: /\.min\.js$/,
+    //     minimize: true
+    // })
+],
+
     }),
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,

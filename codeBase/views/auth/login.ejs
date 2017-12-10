@@ -5,11 +5,20 @@
     <% include ../partials/nav.ejs %>
     <div >
         <h1>Login Form</h1>
+        <!--/*mongoose form start*/-->
         <form action="/auth/login" method="post">
             <input type="text" name="username">
             <input type="password" name="password">
             <input type="submit" >
         </form>
+        <!--/*mongoose form end*/-->
+        <!--/*sequelize form start*/-->
+        <form action="/auth/login" method="post">
+            <input type="text" name="email">
+            <input type="password" name="password">
+            <input type="submit" >
+        </form>
+        <!--/*sequelize form end*/-->
     </div>
     <% include ../partials/footer.ejs %>
 </body>

@@ -19,9 +19,9 @@ class register extends Component{
         this.updateForm=this.updateForm.bind(this);
         this.registerFormHandler=this.registerFormHandler.bind(this);
     }
-
+    /* sequel register function  start*/
     registerFormHandler(){
-        axios.post(`/api/auth/register`,{username:this.state.username,password:this.state.password})
+        axios.post(`/api/auth/register`,{firstname:this.state.firstname,lastname:this.state.lastname,email:this.state.email,password:this.state.password})
             .then(res => {
                 // console.log(res.data)
                 if(res.data){
@@ -33,6 +33,7 @@ class register extends Component{
 
             });
     }
+    /* sequel register function  end*/
     updateForm(e){
         var obj ={};
         obj[e.target.name] = e.target.value;
@@ -49,12 +50,29 @@ class register extends Component{
                     <Typography type="display1" gutterBottom >
                         Registration Form
                     </Typography>
+                    {/*sequel form start*/}
                     <FormControl>
                         <TextField
-                            label="username"
-                            id="username"
+                            label="First Name"
+                            id="firstname"
                             type="text"
-                            name="username"
+                            name="firstname"
+                            onChange={this.updateForm}/>
+                    </FormControl>
+                    <FormControl>
+                        <TextField
+                            label="Last Name"
+                            id="lastname"
+                            type="text"
+                            name="lastname"
+                            onChange={this.updateForm}/>
+                    </FormControl>
+                    <FormControl>
+                        <TextField
+                            label="Email"
+                            id="email"
+                            type="email"
+                            name="email"
                             onChange={this.updateForm}/>
                     </FormControl>
                     <FormControl>
@@ -69,6 +87,7 @@ class register extends Component{
                         <Save  />
                         Save
                     </Button>
+                    {/*sequel form end*/}
                 </div>
                 {this.state.isRegistered ?
                     <Redirect to='/login'/>

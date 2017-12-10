@@ -27,11 +27,40 @@ router.get('/zip', function(req, res){
   if(!req.query.database.mongodb){
     commands.push("sed -i '/MONGOOSE START/,/MONGOOSE END/d' duplicate/codeBase/routes/auth.js")
     commands.push("sed -i '/mongoose start/,/mongoose end/d' duplicate/codeBase/models/user.js")
+    commands.push("sed -i '/mongoose start/,/mongoose end/d' duplicate/codeBase/services/passport.js");
+    commands.push("sed -i '/mongo start/,/mongo end/d' duplicate/codeBase/app.js");
+    commands.push("sed -i '/mongoose form start/,/mongoose form end/d' duplicate/codeBase/views/auth/register.ejs");
+    commands.push("sed -i '/mongoose form start/,/mongoose form end/d' duplicate/codeBase/views/auth/login.ejs");
+    commands.push("sed -i '/mongoose form start/,/mongoose form end/d' duplicate/codeBase/views/auth/login.pug");
+    commands.push("sed -i '/mongoose form start/,/mongoose form end/d' duplicate/codeBase/views/auth/register.pug");
+
+      if(req.query.frontend.react) {
+          commands.push("sed -i '/mongo login start/,/mongo login end/d' duplicate/codeBase/reactApp/Users/login.js");
+          commands.push("sed -i '/mongo form start/,/mongo form  end/d' duplicate/codeBase/reactApp/Users/login.js");
+          commands.push("sed -i '/mongo register function start/,/sequel register function end/d' duplicate/codeBase/reactApp/Users/register.js");
+          commands.push("sed -i '/mongo form start/,/mongo form end/d' duplicate/codeBase/reactApp/Users/register.js");
+      }
   }
   if(!req.query.database.mysql){
 		commands.push("sed -i '/SEQUELIZE START/,/SEQUELIZE END/d' duplicate/codeBase/routes/auth.js");
 		commands.push("sed -i '/sequel start/,/sequel end/d' duplicate/codeBase/models/user.js");
+		commands.push("sed -i '/sequel start/,/sequel end/d' duplicate/codeBase/services/passport.js");
+      commands.push("sed -i '/sequel with react start/,/sequel with react end/d' duplicate/codeBase/app.js");
+      commands.push(" rm duplicate/codeBase/config/config.json");
+      commands.push("sed -i '/sequelize form start/,/sequelize form end/d' duplicate/codeBase/views/auth/register.ejs");
+      commands.push("sed -i '/sequelize form start/,/sequelize form end/d' duplicate/codeBase/views/auth/login.ejs");
+      commands.push("sed -i '/sequelize form start/,/sequelize form end/d' duplicate/codeBase/views/auth/register.pug");
+      commands.push("sed -i '/sequelize form start/,/sequelize form end/d' duplicate/codeBase/views/auth/login.pug");
+      if(req.query.frontend.react) {
+          commands.push("sed -i '/sequel login start/,/sequel login end/d' duplicate/codeBase/reactApp/Users/login.js");
+          commands.push("sed -i '/sequel form start/,/sequel form end/d' duplicate/codeBase/reactApp/Users/login.js");
+          commands.push("sed -i '/sequel register function  start/,/sequel register function  end/d' duplicate/codeBase/reactApp/Users/register.js");
+          commands.push("sed -i '/sequel form start/,/sequel form end/d' duplicate/codeBase/reactApp/Users/register.js");
+      }
   }
+    if(req.query.database.mongodb){
+        commands.push("sed -i '/react start/,/react end/d' duplicate/codeBase/models/index.js");
+    }
   if(req.query.frontend.react){
 	  commands.push("sed -i '/jade start/,/jade end/d' duplicate/codeBase/app.js");
 	  commands.push("sed -i '/ejs start/,/ejs end/d' duplicate/codeBase/app.js");
@@ -39,9 +68,7 @@ router.get('/zip', function(req, res){
 	  commands.push("sed -i '/ejs,jade start/,/ejs,jade end/d' duplicate/codeBase/routes/auth.js");
 	  commands.push("sed -i '/ejs,jade start/,/ejs,jade end/d' duplicate/codeBase/routes/index.js");
 	  commands.push("rm -rf duplicate/codeBase/views");
-      if(req.query.database.mongodb){
-          commands.push("sed -i '/react start/,/react end/d' duplicate/codeBase/routes/index.js");
-      }
+
   } else {
 	  if(req.query.frontend.ejs){
 		  commands.push("sed -i '/jade start/,/jade end/d' duplicate/codeBase/app.js");
@@ -49,7 +76,7 @@ router.get('/zip', function(req, res){
 		  commands.push("find duplicate/codeBase/views/auth/*.pug -delete");
 		  commands.push("find duplicate/codeBase/views/partials/*.pug -delete");
 		  commands.push("sed -i '/react start/,/react end/d' duplicate/codeBase/routes/auth.js");
-		  commands.push("sed -i '/react start/,/react start/d' duplicate/codeBase/routes/index.js");
+		  commands.push("sed -i '/react start/,/react end/d' duplicate/codeBase/routes/index.js");
 		  commands.push("rm -rf duplicate/codeBase/reactApp");
 		  if(req.query.database.mongodb){
               commands.push("sed -i '/ejs,jade start/,/ejs,jade end/d' duplicate/codeBase/routes/index.js");
@@ -61,7 +88,7 @@ router.get('/zip', function(req, res){
 		  commands.push("find duplicate/codeBase/views/auth/*.ejs -delete");
 		  commands.push("find duplicate/codeBase/views/partials/*.ejs -delete");
 		  commands.push("sed -i '/react start/,/react end/d' duplicate/codeBase/routes/auth.js");
-		  commands.push("sed -i '/react start/,/react start/d' duplicate/codeBase/routes/index.js");
+		  commands.push("sed -i '/react start/,/react end/d' duplicate/codeBase/routes/index.js");
 		  commands.push("rm -rf duplicate/codeBase/reactApp");
           if(req.query.database.mongodb){
               commands.push("sed -i '/ejs,jade start/,/ejs,jade end/d' duplicate/codeBase/routes/index.js");
