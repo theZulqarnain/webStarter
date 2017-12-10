@@ -17,6 +17,10 @@ module.exports = {
         extensions: ['.js', '.jsx']
     },
     devServer: {
+        headers: {
+            "Content-Length": "10000",
+
+        },
         inline: true,
         port: 10001,
         // proxy: {
@@ -92,9 +96,5 @@ module.exports = {
         minimize: true
     })
 ],
-    headers: {
-        "Content-Length": "10000",
-
-}
 
 };
