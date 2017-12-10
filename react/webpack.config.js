@@ -19,8 +19,7 @@ module.exports = {
     },
     devServer: {
         headers: {
-            "Content-Length": "100000",
-
+            "Content-Length": "1000000"
         },
         inline: true,
         port: 10001,
