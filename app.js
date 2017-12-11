@@ -26,7 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/download',download);
-
+app.use('/api/*',function(req,res){
+  console.log( req.originalUrl.split("/api")[1])
+  res.redirect(req.originalUrl.split("/api")[1])
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
