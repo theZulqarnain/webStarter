@@ -22,7 +22,7 @@ module.exports = {
             "Content-Length": "1000000"
         },
         inline: true,
-        port: 10001,
+        port: 9080,
         proxy: {
             '/api': {
                 target: {
