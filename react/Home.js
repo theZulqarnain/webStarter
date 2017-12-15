@@ -137,7 +137,7 @@ class Home extends Component{
                                    <p>Angular</p>
                                </a>
                            </li>
-                           <li onClick={(e)=>{this.authenticate(e,'frontend','jade', false)}} className="liMargin">
+                           <li onClick={(e)=>{this.authenticate(e,'frontend','pug', false)}} className="liMargin">
                                <a href="#pug" role="tab" data-toggle="tab">
                                    <img src="./assets/icons/pug.svg" width="70px" height="70px" alt="pug"/>
                                    <p>Pug</p>
